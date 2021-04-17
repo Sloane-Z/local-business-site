@@ -1,21 +1,41 @@
 import React from 'react';
 import { Jumbotron as Jumbo, Container } from 'react-bootstrap';
 import styled from 'styled-components';
-import boatImage from '../image/boatImage.jpg';
+import banner_1 from '../image/street_food.svg';
+import eating_together from '../image/eating_together.svg';
+
 
 const Styles = styled.div`
   .jumbo {
-    background: url(${boatImage}) no-repeat fixed bottom;
-    background-size: cover;
-    color: #efefef;
-    height: 400px;
+    background-color: #fef3e9;
+    height: 300px;
+    width: 100%;
     position: relative;
     z-index: -2;
+    justify-items: center;
+    margin: 0 0;
+    padding: 0;
   }
 
+
+  .landingInfo{
+    background: url(${eating_together}) no-repeat center ;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-size: 400px 300px;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    z-index: 2;
+    justify-content: center;
+    text-align: center;
+
+  }
+
+/*
   .overlay {
     background-color: #000;
-    opacity: 0.6;
+    opacity: 0.5;
     position: absolute;
     top: 0;
     left: 0;
@@ -23,16 +43,16 @@ const Styles = styled.div`
     right: 0;
     z-index: -1;
   }
+  */
 `;
 
 export const Jumbotron = () => (
   <Styles>
     <Jumbo fluid className="jumbo">
-      <div className="overlay"></div>
-      <Container>
-        <h1>Welcome</h1>
-        <p>Learn to code from my YouTube videos</p>
-      </Container>
+    <div className = 'landingInfo'>
+      <h1>NL Local Business Hub</h1>
+    </div>
+
     </Jumbo>
   </Styles>
 )
