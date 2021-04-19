@@ -105,14 +105,7 @@ export const Item = styled.div`
         box-shadow:         inset 0 0 10px #000000;
     }
 
-
-
-
 `;
-
-
-
-
 
 const CategoryDescription = styled.div`
 
@@ -122,13 +115,18 @@ const CategoryDescription = styled.div`
     }
 `
 
-const CategorySection = ({category}) => {
+const CategorySection = ({category, selectedCategory,setSelectedCategory}) => {
+
+    const onCategoryClicked = (i) => {
+        setSelectedCategory(i)
+    } 
+
     return (
         <Style>
-            <Grid>
+            <Grid >
                 {category.map(
                     (item, index) =>(
-                        <Item>
+                        <Item onClick={()=>onCategoryClicked(item.title)}>
                             <CategoryImage src={item.image}></CategoryImage>
                             <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
                             <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
@@ -137,9 +135,6 @@ const CategorySection = ({category}) => {
                 )}
         </Grid>
         </Style>
-
-
-
 
     )
 }

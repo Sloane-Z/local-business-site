@@ -3,6 +3,7 @@ import bakery_img from '../image/donut.svg';
 import artwork_img from '../image/art.svg';
 
 export const categoryData = [
+
     {   title: 'Food', 
         paragraph: 'Check out all of these gorgeous mountain trips with beautiful views of, you guessed it, the mountains', 
         image: food_img,
