@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled, { css } from 'styled-components';
 import { Card, Button } from 'react-bootstrap';
 
@@ -19,7 +19,6 @@ export const Grid = styled.div`
     }
 `;
 
-
 const CategoryImage = styled.img`
     position: absolute;
     top: 0;
@@ -32,7 +31,6 @@ const CategoryImage = styled.img`
     display: block;
     z-index: -2;
     transition:ease-in-out 0.3s;
-
 `
 
 const CategoryTitle = styled.div`
@@ -85,7 +83,6 @@ export const Item = styled.div`
     border-radius:10px;
     border: 2px solid #ccc;
     
-
     :hover{
         box-shadow:6px 11px 15px 4px rgba(0,0,0,0.82);
         transition-timing-function: ease-in-out;
@@ -95,8 +92,6 @@ export const Item = styled.div`
             transform: scale(1.2);
             transition:ease-in-out 0.3s;
         }
-
-
     }
 
     :active{
@@ -111,13 +106,12 @@ export const Item = styled.div`
         box-shadow:         inset 0 0 10px #000000;
     }
 
-    -moz-box-shadow: ${({ current, selectedCategory }) => (current==selectedCategory ? "inset 0 0 10px #000000" : '')};
-    -webkit-box-shadow: ${({ current, selectedCategory }) => (current==selectedCategory ? "inset 0 0 10px #000000" : '')};
-    box-shadow: ${({ current, selectedCategory }) => (current==selectedCategory ? "inset 0 0 10px #000000" : '')};
+    -moz-box-shadow: ${({ current, selectedCategory }) => (current===selectedCategory ? "inset 0 0 10px #000000" : '')};
+    -webkit-box-shadow: ${({ current, selectedCategory }) => (current===selectedCategory ? "inset 0 0 10px #000000" : '')};
+    box-shadow: ${({ current, selectedCategory }) => (current===selectedCategory ? "inset 0 0 10px #000000" : '')};
 `;
 
 const CategoryDescription = styled.div`
-
     height: 20%;
     p {        
         text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
@@ -125,20 +119,19 @@ const CategoryDescription = styled.div`
 `
 
 
-const CategorySection = ({category,selectedCategory, setSelectedCategory}) => {
-
+const CategorySection = ({reference, clickToScroll, category, selectedCategory, setSelectedCategory}) => {
     const onCategoryClicked = (i) => {
         setSelectedCategory(i);
+        clickToScroll();
     } 
 
-    return (
-        
+    return (       
         <Style>
             <a>
-            <Grid >
+            <Grid ref={reference}>
                 {category.map(
                     (item, index) =>(
-                        <Item onClick={()=>onCategoryClicked(item.title)} current={item.title} selectedCategory={selectedCategory}>
+                        <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
                             <CategoryImage src={item.image}></CategoryImage>
                             <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
                             <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
@@ -148,7 +141,6 @@ const CategorySection = ({category,selectedCategory, setSelectedCategory}) => {
         </Grid>
         </a>
         </Style>
-
     )
 }
 
