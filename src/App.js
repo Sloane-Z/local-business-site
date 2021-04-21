@@ -30,7 +30,7 @@ function App() {
         <Router>
           <NavigationBar />
           <Jumbotron />
-          <CategorySection category = {categoryData} setSelectedCategory={setSelectedCategory}/>
+          <CategorySection category = {categoryData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
           <VendorList data = {vendorList} selectedCategory= {selectedCategory} ></VendorList>
         </Router>
 

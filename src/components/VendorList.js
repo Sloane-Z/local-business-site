@@ -1,39 +1,52 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import {Card, CardGroup, CardDeck, Button, Container} from 'react-bootstrap';
+import {Card, CardGroup, CardDeck, Button, Container, Row, Col} from 'react-bootstrap';
 
-export const Style = styled.div`
+const Style = styled.div`
     background-color: #fef3e9;
-    padding: 10%;
+    padding: 1%;
+
+    .container{
+        display: flex;
+        justify-content: space-between;
+    }
+    .card{
+
+        margin-bottom: 3%;
+        
+    }
 `
 
 
 
 const VendorList = ({data, selectedCategory}) => {
 
-
     return (
         selectedCategory != '' && 
+
         <Style>
-
-            <Container className = "container-fluid mt-4">
-            { data.map(
-                (item, index) =>(
-                    selectedCategory == item.type &&
-                    <Card style={{  }}>
-                    <Card.Img variant="top" src={item.thumbnail} />
-                    <Card.Body>
-                        <Card.Title>{item.name}</Card.Title>
-                        <Card.Text>{item.description}</Card.Text>
-                        <Button variant="primary">Take A Look</Button>
-                    </Card.Body>
-                    </Card>
-                )
-            )}
+            <Container className= "container">
+                <Row className="row">
+                    {data.map(
+                    (item, index) =>(
+                        (selectedCategory == item.type) &&
+                        <Card className=" card col-xs-6 col-md-4 col-lg-3" >
+                        <Card.Img variant="top" src={item.thumbnail} />
+                        <Card.Body>
+                            <Card.Title>{item.name}</Card.Title>
+                            <Card.Text>{item.description}</Card.Text>
+                        </Card.Body>
+                        </Card>                
+                    )
+                    )
+                        
+                }
+                </Row>
+                    
+                
             </Container>
-
-        </Style>
+            </Style>
 
     )
 };

@@ -104,7 +104,16 @@ export const Item = styled.div`
         -webkit-box-shadow: inset 0 0 10px #000000;
         box-shadow:         inset 0 0 10px #000000;
     }
+    :target{
 
+        -moz-box-shadow:    inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 10px #000000;
+        box-shadow:         inset 0 0 10px #000000;
+    }
+
+    -moz-box-shadow: ${({ current, selectedCategory }) => (current==selectedCategory ? "inset 0 0 10px #000000" : '')};
+    -webkit-box-shadow: ${({ current, selectedCategory }) => (current==selectedCategory ? "inset 0 0 10px #000000" : '')};
+    box-shadow: ${({ current, selectedCategory }) => (current==selectedCategory ? "inset 0 0 10px #000000" : '')};
 `;
 
 const CategoryDescription = styled.div`
@@ -115,18 +124,21 @@ const CategoryDescription = styled.div`
     }
 `
 
-const CategorySection = ({category, selectedCategory,setSelectedCategory}) => {
+
+const CategorySection = ({category,selectedCategory, setSelectedCategory}) => {
 
     const onCategoryClicked = (i) => {
-        setSelectedCategory(i)
+        setSelectedCategory(i);
     } 
 
     return (
+        
         <Style>
+            <a>
             <Grid >
                 {category.map(
                     (item, index) =>(
-                        <Item onClick={()=>onCategoryClicked(item.title)}>
+                        <Item onClick={()=>onCategoryClicked(item.title)} current={item.title} selectedCategory={selectedCategory}>
                             <CategoryImage src={item.image}></CategoryImage>
                             <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
                             <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
@@ -134,6 +146,7 @@ const CategorySection = ({category, selectedCategory,setSelectedCategory}) => {
                     )
                 )}
         </Grid>
+        </a>
         </Style>
 
     )
