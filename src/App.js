@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { Home } from './Home';
 import { About } from './About';
-import { Contact } from './Contact';
+import { Contact } from './components/Contact';
 import { NoMatch } from './NoMatch';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
@@ -17,8 +17,7 @@ import VendorList from './components/VendorList';
 import { categoryData } from './data/categoryData';
 import { vendorList } from './data/foodVendorList';
 
-const Style = styled.div`
-`
+
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -32,6 +31,8 @@ function App() {
           <Jumbotron />
           <CategorySection reference={el1} clickToScroll={()=> scrollToDiv(el2)} category = {categoryData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
           <VendorList reference={el2}  data = {vendorList} selectedCategory= {selectedCategory} ></VendorList>
+          <Contact></Contact>
+
 
 
         </Router>
