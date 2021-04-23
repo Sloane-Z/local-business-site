@@ -71,9 +71,6 @@ const ContactInfo = styled.div`
 
 `
 
-const ContactForm = styled.form`
-`
-
 const IconText = styled.div`
   display: flex;
   align-items: center;
@@ -228,7 +225,7 @@ const FormGroup = styled.div`
 
 const FormGroupSolo = styled.div`
   ${FormStyle};
-
+  width: 100%!important;
 `
 
 export const Contact = () => (
@@ -276,7 +273,7 @@ export const Contact = () => (
                 <input type="tel"/>
               </FormGroup>        
           </div>  
-          <div className='col solo'>
+          <div className='col'>
             <FormGroupSolo>
               <label>Message</label>
               <textarea></textarea>
