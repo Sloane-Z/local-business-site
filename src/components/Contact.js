@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import {Card, CardGroup, CardDeck, Button, Row, Col} from 'react-bootstrap';
+import {Card, CardGroup, CardDeck, Row, Col} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Email } from '@styled-icons/material/Email';
@@ -180,54 +180,33 @@ const FormStyle = css`
       border-bottom: 1px solid #05f7ff;
     }
   }
-  &.textarea{
-    padding: 0;
-  }
 `
 
 const FormGroup = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  flex: 0 0 100%;
-  padding-right: 40px;
-  transition: all .3s ease;
-  &::nth-last-child(){
-    padding-right: 0;
-  }
-  label{
-    font-size: .9rem;
-    color: 2px solid rgba(255,255,255,.6);
-    margin-bottom: 1rem;
-  }
-  input[type='text'], input[type='tel'], input[type='email'], textarea{
-    background:rgba(255,255,255,.2);
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 1.5rem;
-    font-weight:300;
-    color: white;
-    background: transparent;
-    border-bottom: 2px solid rgba(255,255,255,.4);
-    transition: all .3s ease-in-out;
-    margin-bottom: 2rem;
-    &:focus{
-      border:none;
-      outline: none;
-      border-bottom: 1px solid #05f7ff;
-    }
-  }
-  &.textarea{
-    padding: 0;
-  }
+  ${FormStyle};
 `
 
 const FormGroupSolo = styled.div`
   ${FormStyle};
-  width: 100%!important;
+  width: 100% !important;
+  padding: 0;
 `
+const FormGroupSoloRight = styled.div`
+  ${FormStyle};
+  width: 100% !important;
+  padding: 0;
+  align-items: flex-end;
 
+`
+const Button = styled.button`
+  width: 200px;
+  height: 60px;
+  cursor: pointer;
+  background: white;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 5px;
+`
 export const Contact = () => (
 
   <Container>
@@ -279,6 +258,11 @@ export const Contact = () => (
               <textarea></textarea>
             </FormGroupSolo>
           </div>    
+          <div className='col'>
+            <FormGroupSoloRight>
+              <Button className='primary'>Send Message</Button>
+            </FormGroupSoloRight>
+          </div>   
         </Form>
 
     </ContactContainer>
