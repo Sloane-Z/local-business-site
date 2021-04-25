@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import {Card, CardGroup, CardDeck, Row, Col} from 'react-bootstrap';
+import {Card, CardGroup, CardDeck, Row, Col, Container} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Email } from '@styled-icons/material/Email';
@@ -11,7 +11,7 @@ import { Facebook } from '@styled-icons/bootstrap/Facebook';
 import { Instagram } from '@styled-icons/boxicons-logos/Instagram';
 import { Twitter } from '@styled-icons/bootstrap/Twitter';
 
-const Container = styled.div`
+const Wrapper = styled.div`
     background: blue;
     display: flex;
     flex-direction: column;
@@ -33,10 +33,14 @@ const Container = styled.div`
       font-size: 1.5rem;
       text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
     }
+    .container{
+      width: 100%;
+      padding: 40px;
+    }
 `
 
 const ContactContainer = styled.div`
-  width: 1200px;
+  width: 70%;
   border-radius: 15px;
   overflow: hidden;
   padding: 10px;
@@ -61,12 +65,18 @@ const ContactInfo = styled.div`
     font-size: 2rem;
     font-weight: 500;
     margin: 0;
+    text-align: left;
   }
   p{
     color: rgba(255,255,255,.7);
     font-size: 1.2rem;
     font-weight: 300;
     margin-bottom: 2rem;
+    text-align: left;
+    
+  }
+  @media screen and (max-width: 768px){
+    display: none;
   }
 
 `
@@ -117,6 +127,7 @@ const SocialMedia = styled.div`
   display: flex;
   width: 50%;
   justify-content: space-between;
+
 `
 
 const IconCircle = styled.a`
@@ -127,6 +138,7 @@ const IconCircle = styled.a`
   height: 40px;
   border-radius: 50%;
   transition: .3s all ease-in-out;
+  color: white;
   &:hover{
     background: #05f7ff;
   }
@@ -209,63 +221,78 @@ const Button = styled.button`
 `
 export const Contact = () => (
 
-  <Container>
+  <Wrapper>
     <h1>Contact Us</h1>
     <p className = 'sub-title'>lorem ipsum</p>
     <ContactContainer>
 
       <ContactInfo>
+        <Row>
+          <Col className ='col-sm-0 col-md-12 col-lg-12'>
+          <h4>Contact Information</h4>
+          <p>Fill up the form and our Team will get back to you within 24 hours.</p>
 
-        <h4>Contact Information</h4>
-        <p>Fill up the form and our Team will get back to you within 24 hours.</p>
+          <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
+          <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
+          <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
 
-        <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
-        <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
-        <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
+          <SocialMedia>
+            <IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle>
+            <IconCircle href='#' > <InsIcon size = '25' aria-hidden ='true'/></IconCircle>
+            <IconCircle href='#' > <TwitterIcon size = '25' aria-hidden ='true'/></IconCircle>          
+          </SocialMedia>
+          </Col>
+        </Row>
 
-        <SocialMedia>
-          <IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle>
-          <IconCircle href='#' > <InsIcon size = '25' aria-hidden ='true'/></IconCircle>
-          <IconCircle href='#' > <TwitterIcon size = '25' aria-hidden ='true'/></IconCircle>          
-        </SocialMedia>
       </ContactInfo>
-      <Form>
-          <div className='col'>
-            <FormGroup>
-              <label>First Name</label>
-              <input type="text"/>
-            </FormGroup>
+      <Container>
+          <Row>
+            <Col className ='col-sm-12 col-md-6 col-lg-6'>
+              <FormGroup>
+                <label>First Name</label>
+                <input type="text"/>
+              </FormGroup>
+            </Col>
+            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
+              <FormGroup>
+                <label>Last Name</label>
+                <input type="text"/>
+              </FormGroup>
+            </Col>
+          </Row>
 
-            <FormGroup>
-              <label>Last Name</label>
-              <input type="text"/>
-            </FormGroup>
-          </div>    
-          <div className='col'>
-            <FormGroup>
+          <Row>
+            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
+              <FormGroup>
                 <label>E-Mail</label>
                 <input type="email"/>
               </FormGroup>
-              
+            </Col>
+            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
               <FormGroup>
                 <label>Phone #</label>
                 <input type="tel"/>
-              </FormGroup>        
-          </div>  
-          <div className='col'>
-            <FormGroupSolo>
-              <label>Message</label>
-              <textarea></textarea>
-            </FormGroupSolo>
-          </div>    
-          <div className='col'>
-            <FormGroupSoloRight>
-              <Button className='primary'>Send Message</Button>
-            </FormGroupSoloRight>
-          </div>   
-        </Form>
+              </FormGroup>   
+            </Col>
+          </Row> 
+
+          <Row>
+            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
+              <FormGroupSolo>
+                <label>Message</label>
+                <textarea></textarea>
+              </FormGroupSolo>
+            </Col>
+          </Row>
+
+          <Row>
+            <FormGroupSoloRight >
+                <Button className='primary'>Send Message</Button>
+              </FormGroupSoloRight>
+          </Row>   
+        </Container>
 
     </ContactContainer>
     
-  </Container>
+  </Wrapper>
 )
