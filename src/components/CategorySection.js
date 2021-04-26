@@ -128,7 +128,7 @@ const CategorySection = ({reference, clickToScroll, category, selectedCategory, 
     return (       
         <Style>
             <a>
-            <Grid ref={reference}>
+            <Grid ref={reference} id='category'>
                 {category.map(
                     (item, index) =>(
                         <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
@@ -138,8 +138,8 @@ const CategorySection = ({reference, clickToScroll, category, selectedCategory, 
                         </Item>
                     )
                 )}
-        </Grid>
-        </a>
+            </Grid>
+            </a>
         </Style>
     )
 }

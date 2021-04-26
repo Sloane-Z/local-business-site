@@ -1,9 +1,10 @@
-import React from 'react'
+
+import React from 'react';
+import emailjs from 'emailjs-com';
+import apiKey from '../data/emailKey';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import {Card, CardGroup, CardDeck, Row, Col, Container} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { Email } from '@styled-icons/material/Email';
 import { MapMarker} from '@styled-icons/open-iconic/MapMarker';
 import { Telephone } from '@styled-icons/foundation/Telephone';
@@ -19,24 +20,24 @@ const Wrapper = styled.div`
     align-items: center;
     height: 100vh;
     width: 100%;
-    background-image: url(https://images.unsplash.com/photo-1615750837616-bfb2c23bec39?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80);
+    background-image: url(https://images.unsplash.com/photo-1615750837616-bfb2c23bec39?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80 );
     background-size: cover;
     h1{
       text-align: center;
       color: white;
       font-size: 3rem;
       text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
-    }
+    };
     p, sub-title{
       color: white;
       text-align: center;
       font-size: 1.5rem;
       text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
-    }
+    };
     .container{
       width: 100%;
       padding: 40px;
-    }
+    };
 `
 
 const ContactContainer = styled.div`
@@ -219,10 +220,24 @@ const Button = styled.button`
   text-transform: uppercase;
   border-radius: 5px;
 `
+
+const handleSubmit = (e) => {
+  e.preventDefault(); // Prevents default refresh by the browser
+
+  emailjs.sendForm(apiKey.SERVICE_ID, apiKey.TEMPLATE_ID, e.target, apiKey.USER_ID)
+      .then((result) => {
+          alert("Message Sent!");
+          //console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+
+};
+
 export const Contact = () => (
 
   <Wrapper>
-    <h1>Contact Us</h1>
+    <h1 id='contact'>Contact Us</h1>
     <p className = 'sub-title'>lorem ipsum</p>
     <ContactContainer>
 
@@ -246,53 +261,56 @@ export const Contact = () => (
 
       </ContactInfo>
       <Container>
-          <Row>
+      <form onSubmit={handleSubmit}>
+      <Row>
             <Col className ='col-sm-12 col-md-6 col-lg-6'>
               <FormGroup>
                 <label>First Name</label>
-                <input type="text"/>
+                <input type="text" name='firstName'/>
               </FormGroup>
             </Col>
             <Col  className ='col-sm-12 col-md-6 col-lg-6'>
               <FormGroup>
                 <label>Last Name</label>
-                <input type="text"/>
+                <input type="text" name='lastName'/>
               </FormGroup>
             </Col>
           </Row>
 
           <Row>
-            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
+            <Col className ='col-sm-12 col-md-6 col-lg-6'>
               <FormGroup>
                 <label>E-Mail</label>
-                <input type="email"/>
+                <input type="email" name='email'/>
               </FormGroup>
             </Col>
-            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
+            <Col className ='col-sm-12 col-md-6 col-lg-6'>
               <FormGroup>
                 <label>Phone #</label>
-                <input type="tel"/>
+                <input type="tel" name='phone'/>
               </FormGroup>   
             </Col>
           </Row> 
 
           <Row>
-            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
+            <Col className ='col-sm-12 col-md-6 col-lg-6'>
               <FormGroupSolo>
                 <label>Message</label>
-                <textarea></textarea>
+                <textarea name='message'></textarea>
               </FormGroupSolo>
             </Col>
           </Row>
 
           <Row>
             <FormGroupSoloRight >
-                <Button className='primary'>Send Message</Button>
+                <Button className='primary' type='submit' value='send'>Send Message</Button>
               </FormGroupSoloRight>
           </Row>   
-        </Container>
+      </form>
+
+      </Container>
 
     </ContactContainer>
     
   </Wrapper>
-)
+);
