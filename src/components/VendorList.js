@@ -5,17 +5,35 @@ import {Card, CardGroup, CardDeck, Button, Container, Row, Col} from 'react-boot
 
 const Style = styled.div`
     background-color: #fef3e9;
-
+    
     .container{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        
     }
     .card{
-        //margin-bottom: 3%;       
+        background-color: #fef3e9;
+        backdrop-filter: blur(25px);
+        margin-bottom: 3%;       
         box-sizing: border-box;
-        border: 4px solid transparent;
+        border: 1px solid transparent;
         background-clip: padding-box;
+        border-radius:10px;
+        transition: 0.3s ease-in-out;
+        .card-title{
+            :hover{
+                text-decoration:underline;
+                cursor: pointer;
+            }
+        }
+        :hover{
+            transform:translateY(-10px) scale(1.1,1.1);
+            -moz-box-shadow:   0px 10px 33px 0px rgba(0,0,0,0.75);
+            -webkit-box-shadow: 0px 10px 33px 0px rgba(0,0,0,0.75);
+            box-shadow:         0px 10px 33px 0px rgba(0,0,0,0.75);
+            z-index:10;
+        }
     }
 
     .dividerContainer{
@@ -59,11 +77,11 @@ const VendorList = ({reference, data, selectedCategory}) => {
             <ContainerWrapper ref={reference}>
             <Divider >{selectedCategory}</Divider>
             <Container className= "container" >                
-                <Row className="row">
+                <Row className="row ">
                     {data.map(
                     (item, index) =>(
                         (selectedCategory == item.type) &&
-                        <Card className="card col-sm-6 col-md-4 col-lg-3" >
+                        <Card className="card col-sm-6 col-md-4 col-lg-3 " >
                         <Card.Img variant="top" src={item.thumbnail} />
                         <Card.Body>
                             <Card.Title>{item.name}</Card.Title>

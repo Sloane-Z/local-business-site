@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import styled, { css } from 'styled-components';
-import { Card, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 
 export const Style = styled.div`
@@ -9,7 +9,7 @@ export const Style = styled.div`
 
 export const Grid = styled.div`
     display: grid;
-    padding: 5% 10%;
+    padding: 5% 0;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 350px;
     grid-gap: 60px;
@@ -17,6 +17,7 @@ export const Grid = styled.div`
         grid-template-columns: 1fr;
         grid-template-rows: 350px 350px 350px;
     }
+
 `;
 
 const CategoryImage = styled.img`
@@ -31,6 +32,7 @@ const CategoryImage = styled.img`
     display: block;
     z-index: -2;
     transition:ease-in-out 0.3s;
+    
 `
 
 const CategoryTitle = styled.div`
@@ -127,19 +129,21 @@ const CategorySection = ({reference, clickToScroll, category, selectedCategory, 
 
     return (       
         <Style>
-            <a>
-            <Grid ref={reference} id='category'>
-                {category.map(
-                    (item, index) =>(
-                        <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
-                            <CategoryImage src={item.image}></CategoryImage>
-                            <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
-                            <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
-                        </Item>
-                    )
-                )}
-            </Grid>
-            </a>
+            <Container>
+                <Grid ref={reference} id='category'>
+                    {category.map(
+                        (item, index) =>(
+                            <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
+                                <CategoryImage src={item.image}></CategoryImage>
+                                <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
+                                <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
+                            </Item>
+                        )
+                    )}
+                </Grid>
+            </Container>
+
+
         </Style>
     )
 }
