@@ -221,96 +221,136 @@ const Button = styled.button`
   border-radius: 5px;
 `
 
-const handleSubmit = (e) => {
-  e.preventDefault(); // Prevents default refresh by the browser
+function findValue(JSON_obj, targetKey){
+  for (var x in JSON_obj){
+    if (JSON_obj[x].key === targetKey){
+      return JSON_obj[x].value;
+    }
+  }
 
-  emailjs.sendForm(apiKey.SERVICE_ID, apiKey.TEMPLATE_ID, e.target, apiKey.USER_ID)
-      .then((result) => {
-          alert("Message Sent!");
-          //console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
+}
+
+
+
+export class Contact extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFetching: false,
+      emailAPIKey: []
+  };
+  }
+
+
+  
+  handleSubmit = (e) => {
+    e.preventDefault(); // Prevents default refresh by the browser
+    emailjs.sendForm(findValue(this.state.emailAPIKey.emailAPIKey,"SERVICE_ID"), findValue(this.state.emailAPIKey.emailAPIKey,"TEMPLATE_ID"), e.target, findValue(this.state.emailAPIKey.emailAPIKey,"USER_ID"))
+        .then((result) => {
+            alert("Message Sent!");
+            //console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
 
 };
 
-export const Contact = () => (
 
-  <Wrapper>
-    <h1 id='contact'>Contact Us</h1>
-    <p className = 'sub-title'>lorem ipsum</p>
-    <ContactContainer>
 
-      <ContactInfo>
-        <Row>
-          <Col className ='col-sm-0 col-md-12 col-lg-12'>
-          <h4>Contact Information</h4>
-          <p>Fill up the form and our Team will get back to you within 24 hours.</p>
-
-          <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
-          <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
-          <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
-
-          <SocialMedia>
-            <IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle>
-            <IconCircle href='#' > <InsIcon size = '25' aria-hidden ='true'/></IconCircle>
-            <IconCircle href='#' > <TwitterIcon size = '25' aria-hidden ='true'/></IconCircle>          
-          </SocialMedia>
-          </Col>
-        </Row>
-
-      </ContactInfo>
-      <Container>
-      <form onSubmit={handleSubmit}>
-      <Row>
-            <Col className ='col-sm-12 col-md-6 col-lg-6'>
-              <FormGroup>
-                <label>First Name</label>
-                <input type="text" name='firstName'/>
-              </FormGroup>
-            </Col>
-            <Col  className ='col-sm-12 col-md-6 col-lg-6'>
-              <FormGroup>
-                <label>Last Name</label>
-                <input type="text" name='lastName'/>
-              </FormGroup>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col className ='col-sm-12 col-md-6 col-lg-6'>
-              <FormGroup>
-                <label>E-Mail</label>
-                <input type="email" name='email'/>
-              </FormGroup>
-            </Col>
-            <Col className ='col-sm-12 col-md-6 col-lg-6'>
-              <FormGroup>
-                <label>Phone #</label>
-                <input type="tel" name='phone'/>
-              </FormGroup>   
-            </Col>
-          </Row> 
-
-          <Row>
-            <Col className ='col-sm-12 col-md-6 col-lg-6'>
-              <FormGroupSolo>
-                <label>Message</label>
-                <textarea name='message'></textarea>
-              </FormGroupSolo>
-            </Col>
-          </Row>
-
-          <Row>
-            <FormGroupSoloRight >
-                <Button className='primary' type='submit' value='send'>Send Message</Button>
-              </FormGroupSoloRight>
-          </Row>   
-      </form>
-
-      </Container>
-
-    </ContactContainer>
+  componentDidMount() {
+    fetch('/v1/emailAPIKey').then(res => res.json()).then((data) => {
+      this.setState({ emailAPIKey: data })
+    })
+    .catch(console.log);
     
-  </Wrapper>
-);
+  }
+
+  componentWillUnmount() {
+    
+  }
+
+
+  render() {
+    return(
+      <Wrapper>
+      <h1 id='contact'>Contact Us</h1>
+      <p className = 'sub-title'>lorem ipsum</p>
+      <ContactContainer>
+  
+        <ContactInfo>
+          <Row>
+            <Col className ='col-sm-0 col-md-12 col-lg-12'>
+            <h4>Contact Information</h4>
+            <p>Fill up the form and our Team will get back to you within 24 hours.</p>
+  
+            <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
+            <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
+            <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
+  
+            <SocialMedia>
+              <IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle>
+              <IconCircle href='#' > <InsIcon size = '25' aria-hidden ='true'/></IconCircle>
+              <IconCircle href='#' > <TwitterIcon size = '25' aria-hidden ='true'/></IconCircle>          
+            </SocialMedia>
+            </Col>
+          </Row>
+  
+        </ContactInfo>
+        <Container>
+        <form onSubmit={this.handleSubmit}>
+        <Row>
+              <Col className ='col-sm-12 col-md-6 col-lg-6'>
+                <FormGroup>
+                  <label>First Name</label>
+                  <input type="text" name='firstName'/>
+                </FormGroup>
+              </Col>
+              <Col  className ='col-sm-12 col-md-6 col-lg-6'>
+                <FormGroup>
+                  <label>Last Name</label>
+                  <input type="text" name='lastName'/>
+                </FormGroup>
+              </Col>
+            </Row>
+  
+            <Row>
+              <Col className ='col-sm-12 col-md-6 col-lg-6'>
+                <FormGroup>
+                  <label>E-Mail</label>
+                  <input type="email" name='email'/>
+                </FormGroup>
+              </Col>
+              <Col className ='col-sm-12 col-md-6 col-lg-6'>
+                <FormGroup>
+                  <label>Phone #</label>
+                  <input type="tel" name='phone'/>
+                </FormGroup>   
+              </Col>
+            </Row> 
+  
+            <Row>
+              <Col className ='col-sm-12 col-md-6 col-lg-6'>
+                <FormGroupSolo>
+                  <label>Message</label>
+                  <textarea name='message'></textarea>
+                </FormGroupSolo>
+              </Col>
+            </Row>
+  
+            <Row>
+              <FormGroupSoloRight >
+                  <Button className='primary' type='submit' value='send'>Send Message</Button>
+                </FormGroupSoloRight>
+            </Row>   
+        </form>
+  
+        </Container>
+  
+      </ContactContainer>
+      
+    </Wrapper>
+    )
+
+};
+
+}
