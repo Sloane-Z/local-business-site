@@ -1,7 +1,7 @@
 
 import React from 'react';
 import emailjs from 'emailjs-com';
-import apiKey from '../data/emailKey';
+
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import {Card, CardGroup, CardDeck, Row, Col, Container} from 'react-bootstrap';
