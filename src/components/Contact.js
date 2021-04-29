@@ -273,10 +273,11 @@ export class Contact extends React.Component {
   componentDidMount() {
     fetch('http://backend.stjohnslocalguide.com/v1/emailAPIKey')
     .then(res => res.json()).then((data) => {
+      console.log(data);
       this.state({emailAPIKey: data})
     })
     .catch(console.log);
-  
+
     
   }
 
