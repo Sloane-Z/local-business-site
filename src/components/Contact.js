@@ -255,26 +255,11 @@ export class Contact extends React.Component {
 
 };
 
- getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
 
   componentDidMount() {
     fetch('http://backend.stjohnslocalguide.com/v1/emailAPIKey')
     .then(res => res.json()).then((data) => {
-      console.log(data);
-      this.state({emailAPIKey: data})
+      this.state.emailAPIKey = data;
     })
     .catch(console.log);
 
