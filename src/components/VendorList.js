@@ -100,7 +100,7 @@ export class VendorList extends React.Component{
                             <Card className="card col-sm-6 col-md-4 col-lg-3 " >
                             <Card.Img variant="top" src={item.thumbnail} />
                             <Card.Body>
-                                <Card.Title>{item.name}</Card.Title>
+                                <Card.Title>{item.title}</Card.Title>
                                 <Card.Text>
                                     {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
                                 </Card.Text>
