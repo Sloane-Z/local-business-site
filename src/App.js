@@ -12,7 +12,7 @@ import { NavigationBar } from './components/NavigationBar';
 import { Jumbotron } from './components/Jumbotron';
 
 import CategorySection from './components/CategorySection';
-import VendorList from './components/VendorList';
+import { VendorList } from './components/VendorList';
 // Data
 import { categoryData } from './data/categoryData';
 import { vendorList } from './data/foodVendorList';

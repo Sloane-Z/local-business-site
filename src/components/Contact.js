@@ -248,7 +248,6 @@ export class Contact extends React.Component {
     emailjs.sendForm(findValue(this.state.emailAPIKey.emailAPIKey,"SERVICE_ID"), findValue(this.state.emailAPIKey.emailAPIKey,"TEMPLATE_ID"), e.target, findValue(this.state.emailAPIKey.emailAPIKey,"USER_ID"))
         .then((result) => {
             alert("Message Sent!");
-            //console.log(result.text);
         }, (error) => {
             console.log(error.text);
         });
@@ -261,9 +260,7 @@ export class Contact extends React.Component {
     .then(res => res.json()).then((data) => {
       this.state.emailAPIKey = data;
     })
-    .catch(console.log);
-
-    
+    .catch(console.log);    
   }
 
   componentWillUnmount() {

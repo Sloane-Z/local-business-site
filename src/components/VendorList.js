@@ -70,36 +70,54 @@ const Divider = ({ ref, children }) => {
 
 const LinkText = styled.text`
 `
+export class VendorList extends React.Component{
 
-const VendorList = ({reference, data, selectedCategory}) => {
-    return (
-        <Style >
-            <ContainerWrapper ref={reference}>
-            <Divider >{selectedCategory}</Divider>
-            <Container className= "container" >                
-                <Row className="row ">
-                    {data.map(
-                    (item, index) =>(
-                        (selectedCategory == item.type) &&
-                        <Card className="card col-sm-6 col-md-4 col-lg-3 " >
-                        <Card.Img variant="top" src={item.thumbnail} />
-                        <Card.Body>
-                            <Card.Title>{item.name}</Card.Title>
-                            <Card.Text>
-                                {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
-                            </Card.Text>
+    constructor(props) {
+        super(props);
+        this.state = {
+            vendors: []
+        };
+    }
+    
+    componentDidMount() {
+        fetch('http://backend.stjohnslocalguide.com/v1/vendors')
+        .then(res => res.json()).then((data) => {         
+          this.state.vendors = data.vendors;
+        })
+        .catch(console.log);
+    }
 
-                        </Card.Body>
-                        </Card>                
-                    )
-                    )                       
-                }
-                </Row>                                               
-            </Container>
-            </ContainerWrapper>
-
-            </Style>
-    )
+    render(){
+        return (
+            <Style >
+                <ContainerWrapper ref={this.props.reference}>
+                <Divider >{this.props.selectedCategory}</Divider>
+                <Container className= "container" >                
+                    <Row className="row ">
+                        {this.state.vendors.map(
+                        (item, index) =>(
+                            (this.props.selectedCategory == item.type) &&
+                            <Card className="card col-sm-6 col-md-4 col-lg-3 " >
+                            <Card.Img variant="top" src={item.thumbnail} />
+                            <Card.Body>
+                                <Card.Title>{item.name}</Card.Title>
+                                <Card.Text>
+                                    {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
+                                </Card.Text>
+    
+                            </Card.Body>
+                            </Card>                
+                        )
+                        )                       
+                    }
+                    </Row>                                               
+                </Container>
+                </ContainerWrapper>
+    
+                </Style>
+        )
+    }
+    
 };
 
-export default VendorList
+
