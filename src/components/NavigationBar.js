@@ -8,18 +8,18 @@ const Styles = styled.div`
 
   .navbar {
     position: relative;
-    padding-top:1% !important;
-    padding-bottom:1% !important;
     background-image: none;
-    border-bottom: 1px solid #000;
     transition: all 300ms linear;
+    padding: 1% 0% 1% 0%;
+    -webkit-transition : all 0.3s ease-out;
+	  transition : all 0.3s ease-out;
+    backdrop-filter: blur(25px);
   }
   .navbar-brand{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: block;
-    height:25px;
     font-size:1.6rem;
     font-family:'Poppins',sans-serif;
   }
@@ -61,7 +61,6 @@ const Styles = styled.div`
     position: relative;
     margin: 0 2px 0 2px;
     display: inline-block;
-    
     &:hover {
       color: black;
     }
@@ -71,6 +70,30 @@ const Styles = styled.div`
 
 `;
 
+const Wrapper = styled.div`
+	opacity: 1;
+	padding: 20px 0;
+	box-shadow: 0 10px 30px 0 rgba(138, 155, 165, 0.15);
+	-webkit-transition : all 0.3s ease-out;
+	transition : all 0.3s ease-out;
+  position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	-webkit-transition : all 0.3s ease-out;
+	transition : all 0.3s ease-out;
+  padding: 0;
+  box-shadow: 2px 1px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 2px 1px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 1px 5px 0px rgba(0,0,0,0.75);
+  :scroll-behavior{
+    height: 24px;
+    -webkit-transition : all 0.3s ease-out;
+    transition : all 0.3s ease-out;
+  }
+`
+
 const Divider=styled.hr`
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -79,10 +102,11 @@ const Divider=styled.hr`
     color: black;
 `
 
-
 export const NavigationBar = () => (
 
-  <Styles>   
+  <Styles>
+    <Wrapper>
+       
     <Navbar expand="lg">
       <Navbar.Brand href="/">St.John's Local Guide</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -97,15 +121,33 @@ export const NavigationBar = () => (
           </Nav.Item>
 
           <Nav.Item>
-          <Nav.Link>
+            <Nav.Link>
+            <Link to='Category' spy={true} smooth={true}>Food</Link>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link>
+            <Link to='Category' spy={true} smooth={true}>Bakery</Link>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link>
+            <Link to='Category' spy={true} smooth={true}>Artifacts</Link>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link>
               <Link to='contact' spy={true} smooth={true}>Contact Us</Link>
-              </Nav.Link> 
+            </Nav.Link> 
           </Nav.Item>
 
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-
+    </Wrapper>  
   </Styles >
   
 )

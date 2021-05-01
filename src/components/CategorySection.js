@@ -5,6 +5,9 @@ import { Container } from 'react-bootstrap';
 
 export const Style = styled.div`
     background-color: #fef3e9;
+    .container{
+        padding-top:5%;
+    }
 `
 
 export const Grid = styled.div`
