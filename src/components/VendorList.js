@@ -96,7 +96,7 @@ export class VendorList extends React.Component{
         };
     }
     
-    componentDidMount() {
+    componentWillMount() {
         fetch('http://backend.stjohnslocalguide.com/v1/vendors')
         .then(res => res.json()).then((data) => {         
           this.state.vendors = data.vendors;
