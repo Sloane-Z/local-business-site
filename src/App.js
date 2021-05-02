@@ -6,11 +6,9 @@ import {Element} from 'react-scroll';
 import { Home } from './Home';
 import { About } from './About';
 import { Contact } from './components/Contact';
-import { NoMatch } from './NoMatch';
-import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
 import { Jumbotron } from './components/Jumbotron';
-
+import  ScrollToTop  from'./components/ScrollToTop';
 import CategorySection from './components/CategorySection';
 import { VendorList } from './components/VendorList';
 // Data
@@ -27,13 +25,13 @@ function App() {
   const el3 = useRef();
     return (
     <Router>
-
+       
       <NavigationBar clickToScroll={()=> scrollToDiv()}/>
       <CategorySection reference={el1} clickToScroll={()=> scrollToDiv(el2)} category = {categoryData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
       <VendorList reference={el2}  data = {vendorList} selectedCategory= {selectedCategory} ></VendorList>
 
       <Contact/>
-
+      <ScrollToTop/>
     </Router>
     );
 }
