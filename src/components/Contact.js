@@ -13,20 +13,23 @@ import { Instagram } from '@styled-icons/boxicons-logos/Instagram';
 import { Twitter } from '@styled-icons/bootstrap/Twitter';
 
 const Wrapper = styled.div`
-    background: blue;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100%;
-    background-image: url(https://images.unsplash.com/photo-1615750837616-bfb2c23bec39?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80 );
+
+    background: rgb(219,176,160);
+    background: linear-gradient(0deg, rgba(219,176,160,1) 45%, rgba(224,192,192,1) 100%);
     background-size: cover;
+    
     h1{
       text-align: center;
-      color: white;
-      font-size: 3rem;
+      font-size: 2.5rem;
       text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+      padding-bottom: 2%;
     };
     p, sub-title{
       color: white;
@@ -38,6 +41,24 @@ const Wrapper = styled.div`
       width: 100%;
       padding: 40px;
     };
+
+    .dividerContainer{
+        display: flex;
+        align-items: center;
+        padding: 4%;
+        width: 100%;
+    }
+    .divider{
+        border-bottom: 1px solid black;
+        width: 100%;
+        transition: 0.3s ease-in-out;
+    }
+    .dividerContent {
+        padding: 0 10px 0 10px;
+        font-size: 2rem;
+        width:100%;
+        
+    }
 `
 
 const ContactContainer = styled.div`
@@ -55,7 +76,7 @@ const ContactContainer = styled.div`
 `
 
 const ContactInfo = styled.div`
-  background-color: #5904c2;
+  background-color: #b2481b;
   border-radius: 15px;
   flex: 0 1 40%;
   padding: 40px;
@@ -67,6 +88,7 @@ const ContactInfo = styled.div`
     font-weight: 500;
     margin: 0;
     text-align: left;
+
   }
   p{
     color: rgba(255,255,255,.7);
@@ -221,6 +243,21 @@ const Button = styled.button`
   border-radius: 5px;
 `
 
+const Divider = ({ ref, children }) => {
+
+    return (
+        <div className="dividerContainer" ref={ref}>
+          <div className="divider" />
+          <span className="dividerContent">
+            {children}
+          </span>
+          <div className="divider" />
+        </div>
+      );
+
+
+};
+
 function findValue(JSON_obj, targetKey){
   for (var x in JSON_obj){
     if (JSON_obj[x].key === targetKey){
@@ -271,8 +308,8 @@ export class Contact extends React.Component {
   render() {
     return(
       <Wrapper>
-      <h1 id='contact'>Contact Us</h1>
-      <p className = 'sub-title'>lorem ipsum</p>
+      <Divider><h1 id='contact'> Contact Us</h1></Divider>
+      <p className = 'sub-title'></p>
       <ContactContainer>
   
         <ContactInfo>

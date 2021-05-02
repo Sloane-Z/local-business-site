@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {Card, CardGroup, CardDeck, Button, Container, Row, Col} from 'react-bootstrap';
-
+import { vendorList } from '../data/foodVendorList';
 const Style = styled.div`
-    background-color: #fef3e9;
+    background: rgb(224,192,192);
+    background: linear-gradient(0deg, rgba(224,192,192,1) 45%, rgba(254,243,233,1) 100%);
     
     .container{
         display: flex;
@@ -13,7 +14,6 @@ const Style = styled.div`
         
     }
     .card{
-        background-color: #fef3e9;
         backdrop-filter: blur(25px);
         margin-bottom: 3%;       
         box-sizing: border-box;
@@ -21,6 +21,8 @@ const Style = styled.div`
         background-clip: padding-box;
         border-radius:10px;
         transition: 0.3s ease-in-out;
+        -webkit-transition : all 0.3s ease-out;
+        background-color:transparent;
         .card-title{
             :hover{
                 text-decoration:underline;
@@ -44,6 +46,14 @@ const Style = styled.div`
     .divider{
         border-bottom: 1px solid black;
         width: 100%;
+        transition: 0.3s ease-in-out;
+
+    }
+    h3{
+        text-align: center;
+        font-size: 2rem;
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+        padding-bottom: 2%;
     }
     .dividerContent {
         padding: 0 10px 0 10px;
@@ -57,15 +67,22 @@ const ContainerWrapper = styled.div`
 `
 
 const Divider = ({ ref, children }) => {
-    return (
-      <div className="dividerContainer" ref={ref}>
-        <div className="divider" />
-        <span className="dividerContent">
-          {children}
-        </span>
-        <div className="divider" />
-      </div>
-    );
+    if(children !== '')
+    {
+        return (
+            <div className="dividerContainer" ref={ref}>
+              <div className="divider" />
+              <span className="dividerContent">
+                {children}
+              </span>
+              <div className="divider" />
+            </div>
+          );
+    }
+    else{
+        return <div></div>
+    }
+
   };
 
 const LinkText = styled.text`
@@ -91,27 +108,29 @@ export class VendorList extends React.Component{
         return (
             <Style >
                 <ContainerWrapper ref={this.props.reference}>
-                <Divider >{this.props.selectedCategory}</Divider>
-                <Container className= "container" >                
-                    <Row className="row ">
-                        {this.state.vendors.map(
-                        (item, index) =>(
-                            (this.props.selectedCategory == item.type) &&
-                            <Card className="card col-sm-6 col-md-4 col-lg-3 " >
-                            <Card.Img variant="top" src={item.thumbnail} />
-                            <Card.Body>
-                                <Card.Title>{item.title}</Card.Title>
-                                <Card.Text>
-                                    {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
-                                </Card.Text>
-    
-                            </Card.Body>
-                            </Card>                
-                        )
-                        )                       
-                    }
-                    </Row>                                               
-                </Container>
+                    <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
+                    <Container className= "container" >                
+                        <Row className="row ">
+
+                            {vendorList.map(
+                                (item, index) =>(
+                                    (this.props.selectedCategory == item.type) &&
+                                    <Card className="card col-sm-6 col-md-4 col-lg-3 " >
+                                    <Card.Img variant="top" src={item.thumbnail} />
+                                    <Card.Body>
+                                        <Card.Title>{item.name}</Card.Title>
+                                        <Card.Text>
+                                            {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
+                                        </Card.Text>
+            
+                                    </Card.Body>
+                                    </Card>                
+                                    )
+                                )                       
+                            }
+
+                        </Row>                                               
+                    </Container>
                 </ContainerWrapper>
     
                 </Style>

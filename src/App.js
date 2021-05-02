@@ -20,7 +20,7 @@ import { vendorList } from './data/foodVendorList';
 
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('Food');
   const scrollToDiv = (ref) => window.scrollTo({top: ref.current.offsetTop, behavior: 'smooth'});
   const el1 = useRef();
   const el2 = useRef();
