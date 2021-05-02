@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-scroll';
 import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
-
+import { categoryData } from '../data/categoryData';
 
 const Styles = styled.div`
 
@@ -102,8 +102,12 @@ const Divider=styled.hr`
     color: black;
 `
 
-export const NavigationBar = () => (
-
+export const NavigationBar = ({clickToScroll, setSelectedCategory}) => {
+  const onCategoryClicked = (i) => {
+    setSelectedCategory(i);
+    clickToScroll();
+  } 
+  return(
   <Styles>
     <Wrapper>
        
@@ -114,29 +118,16 @@ export const NavigationBar = () => (
 
         <Nav className="ml-auto">
 
-          <Nav.Item>
-            <Nav.Link>
-            <Link to='category' spy={true} smooth={true}>Category</Link>
-            </Nav.Link>
-          </Nav.Item>
+          {categoryData.map(
+            (item, index) =>(
+                <Nav.Item onClick={()=>{onCategoryClicked(item.title)} }>
+                  <Nav.Link>
+                    <Link spy={true} smooth={true}>{item.title}</Link>
+                  </Nav.Link>
+                </Nav.Item>
+            )
+          )}
 
-          <Nav.Item>
-            <Nav.Link>
-            <Link to='Category' spy={true} smooth={true}>Food</Link>
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link>
-            <Link to='Category' spy={true} smooth={true}>Bakery</Link>
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link>
-            <Link to='Category' spy={true} smooth={true}>Artifacts</Link>
-            </Nav.Link>
-          </Nav.Item>
 
           <Nav.Item>
             <Nav.Link>
@@ -149,5 +140,5 @@ export const NavigationBar = () => (
     </Navbar>
     </Wrapper>  
   </Styles >
-  
-)
+  )
+            }

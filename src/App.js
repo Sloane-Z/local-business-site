@@ -26,7 +26,7 @@ function App() {
     return (
     <Router>
        
-      <NavigationBar clickToScroll={()=> scrollToDiv()}/>
+      <NavigationBar clickToScroll={()=> scrollToDiv(el2)}  selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
       <CategorySection reference={el1} clickToScroll={()=> scrollToDiv(el2)} category = {categoryData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
       <VendorList reference={el2}  data = {vendorList} selectedCategory= {selectedCategory} ></VendorList>
 

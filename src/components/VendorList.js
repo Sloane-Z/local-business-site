@@ -112,7 +112,7 @@ export class VendorList extends React.Component{
                     <Container className= "container" >                
                         <Row className="row ">
 
-                            {this.state.vendors.map(
+                            {vendorList.map(
                                 (item, index) =>(
                                     (this.props.selectedCategory === item.type) &&
                                     <Card className="card col-sm-6 col-md-4 col-lg-3 " >
