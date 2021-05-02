@@ -114,7 +114,7 @@ export class VendorList extends React.Component{
 
                             {this.state.vendors.map(
                                 (item, index) =>(
-                                    (this.props.selectedCategory == item.type) &&
+                                    (this.props.selectedCategory === item.type) &&
                                     <Card className="card col-sm-6 col-md-4 col-lg-3 " >
                                     <Card.Img variant="top" src={item.thumbnail} />
                                     <Card.Body>
