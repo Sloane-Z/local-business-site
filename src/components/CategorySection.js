@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 
 
 export const Style = styled.div`
+    font-family: 'Poppins', sans-serif;
     background-color: #fef3e9;
     .container{
         padding-top:5%;

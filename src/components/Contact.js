@@ -1,10 +1,12 @@
 
 import React from 'react';
 import emailjs from 'emailjs-com';
-
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import {Card, CardGroup, CardDeck, Row, Col, Container} from 'react-bootstrap';
+import {Row, Col, Container} from 'react-bootstrap';
+
+import {AwesomeButton,AwesomeButtonProgress,AwesomeButtonSocial,} from 'react-awesome-button';
+import "react-awesome-button/dist/styles.css";
+//Icons
 import { Email } from '@styled-icons/material/Email';
 import { MapMarker} from '@styled-icons/open-iconic/MapMarker';
 import { Telephone } from '@styled-icons/foundation/Telephone';
@@ -12,8 +14,9 @@ import { Facebook } from '@styled-icons/bootstrap/Facebook';
 import { Instagram } from '@styled-icons/boxicons-logos/Instagram';
 import { Twitter } from '@styled-icons/bootstrap/Twitter';
 
-const Wrapper = styled.div`
 
+const Wrapper = styled.div`
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,6 +62,30 @@ const Wrapper = styled.div`
         width:100%;
         
     }
+    .AwesomeButtonProgress {
+      --button-default-height: 47px !important;
+      --button-default-font-size: 14px;
+      --button-default-border-radius: 6px;
+      --button-horizontal-padding: 20px;
+      --button-raise-level: 5px;
+      --button-hover-pressure: 2;
+      --transform-speed: 0.185s;
+      --button-primary-color: #475472;
+      --button-primary-color-dark: #2a3143;
+      --button-primary-color-light: #d4d9e4;
+      --button-primary-color-hover: #424e6a;
+      --button-primary-border: none;
+      --button-secondary-color: #fffc6c !important;
+      --button-secondary-color-dark: #b9b500 !important;
+      --button-secondary-color-light: #6c6a00 !important;
+      --button-secondary-color-hover: #fffb3e;
+      --button-secondary-border: none;
+      --button-anchor-color: #f3c8ad;
+      --button-anchor-color-dark: #734922;
+      --button-anchor-color-light: #4c3016;
+      --button-anchor-color-hover: #f1bfa0;
+      --button-anchor-border: 1px solid #8c633c;
+}
 `
 
 const ContactContainer = styled.div`
@@ -149,7 +176,8 @@ const TwitterIcon = styled(Twitter)`
 const SocialMedia = styled.div`
   display: flex;
   width: 50%;
-  justify-content: space-between;
+  margin-left:0;
+  margin-right:auto;
 
 `
 
@@ -374,7 +402,7 @@ export class Contact extends React.Component {
   
             <Row>
               <FormGroupSoloRight >
-                  <Button className='primary' type='submit' value='send'>Send Message</Button>
+                  <AwesomeButtonProgress size="large" type="primary submit"  value='send'>Send Message</AwesomeButtonProgress>
                 </FormGroupSoloRight>
             </Row>   
         </form>

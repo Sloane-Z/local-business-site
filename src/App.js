@@ -11,6 +11,8 @@ import { Jumbotron } from './components/Jumbotron';
 import  ScrollToTop  from'./components/ScrollToTop';
 import CategorySection from './components/CategorySection';
 import { VendorList } from './components/VendorList';
+import { Footer } from './components/Footer';
+
 // Data
 import { categoryData } from './data/categoryData';
 import { vendorList } from './data/foodVendorList';
@@ -32,6 +34,7 @@ function App() {
 
       <Contact/>
       <ScrollToTop/>
+      <Footer></Footer>
     </Router>
     );
 }

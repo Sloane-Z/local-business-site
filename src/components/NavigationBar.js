@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 import {Link} from 'react-scroll';
 import { Nav, Navbar } from 'react-bootstrap';
-import styled from 'styled-components';
 import { categoryData } from '../data/categoryData';
 
 const Styles = styled.div`
