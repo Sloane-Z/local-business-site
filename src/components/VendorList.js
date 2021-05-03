@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {Card, CardGroup, CardDeck, Button, Container, Row, Col} from 'react-bootstrap';
@@ -87,50 +87,55 @@ const Divider = ({ ref, children }) => {
 
 const LinkText = styled.text`
 `
-export class VendorList extends React.Component{
+
+
+const Child = ({vendors, reference, selectedCategory}) =>{        
+    return (
+        <Style >
+        <ContainerWrapper ref={reference}>
+            <Divider ><h3>{selectedCategory}</h3></Divider>
+            <Container className= "container" >                
+                <Row className="row ">
+
+                    {vendors.map(
+                        (item, index) =>(
+                            (selectedCategory === item.type) &&
+                            <Card className="card col-sm-6 col-md-4 col-lg-3 " >
+                            <Card.Img variant="top" src={item.thumbnail} />
+                            <Card.Body>
+                                <Card.Title>{item.title}</Card.Title>
+                                <Card.Text>
+                                    {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
+                                </Card.Text>
     
-    constructor(props) {
-        super(props);
-    }
-    
+                            </Card.Body>
+                            </Card>                
+                            )
+                        )                       
+                    }
 
-    render(){
-        return (
+                </Row>                                               
+            </Container>
+        </ContainerWrapper>
 
-            <Style >
-            <ContainerWrapper ref={this.props.reference}>
-                <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
-                <Container className= "container" >                
-                    <Row className="row ">
+        </Style>
 
-                        {this.props.vendors.map(
-                            (item, index) =>(
-                                (this.props.selectedCategory === item.type) &&
-                                <Card className="card col-sm-6 col-md-4 col-lg-3 " >
-                                <Card.Img variant="top" src={item.thumbnail} />
-                                <Card.Body>
-                                    <Card.Title>{item.title}</Card.Title>
-                                    <Card.Text>
-                                        {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
-                                    </Card.Text>
-        
-                                </Card.Body>
-                                </Card>                
-                                )
-                            )                       
-                        }
-
-                    </Row>                                               
-                </Container>
-            </ContainerWrapper>
-
-            </Style>
-
-        )
-
-        
-    }
-    
+    )
+     
 };
 
-
+export const VendorList= ({reference, selectedCategory}) =>{
+    const [vendors, setVendors] = useState();
+    useEffect(()=> {
+        fetch('http://backend.stjohnslocalguide.com/v1/vendors')
+        .then(res => res.json()).then((data) => {         
+          setVendors(data);
+        })
+        .catch(console.log);
+      },[]);
+    return (
+        <div>
+            <Child vendors = {vendors} reference={reference} selectedCategory={selectedCategory}></Child>
+        </div>
+    )
+};
