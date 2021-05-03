@@ -94,7 +94,7 @@ export class VendorList extends React.Component{
         this.state = {
             processing: true,
             selectedCategory:'',
-            vendors:null
+            vendors:[]
         };
     }
     
@@ -111,7 +111,8 @@ export class VendorList extends React.Component{
 
     render(){
         return (
-            !this.state.processing &&
+            !this.state.processing ? 
+            (
             <Style >
                 <ContainerWrapper ref={this.props.reference}>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
@@ -140,6 +141,7 @@ export class VendorList extends React.Component{
                 </ContainerWrapper>
     
                 </Style>
+                ):<></>
         )
     }
     
