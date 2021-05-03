@@ -102,7 +102,7 @@ const Divider=styled.hr`
     color: black;
 `
 
-export const NavigationBar = ({clickToScroll, setSelectedCategory}) => {
+export const NavigationBar = ({reference, clickToScroll, setSelectedCategory}) => {
   const onCategoryClicked = (i) => {
     setSelectedCategory(i);
     clickToScroll();
@@ -112,7 +112,7 @@ export const NavigationBar = ({clickToScroll, setSelectedCategory}) => {
     <Wrapper>
        
     <Navbar expand="lg">
-      <Navbar.Brand href="/">St.John's Local Guide</Navbar.Brand>
+      <Navbar.Brand href="/" ref={reference}>St.John's Local Guide</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
 
@@ -121,18 +121,14 @@ export const NavigationBar = ({clickToScroll, setSelectedCategory}) => {
           {categoryData.map(
             (item, index) =>(
                 <Nav.Item onClick={()=>{onCategoryClicked(item.title)} }>
-                  <Nav.Link>
-                    <Link spy={true} smooth={true}>{item.title}</Link>
-                  </Nav.Link>
+                  <Nav.Link>{item.title}</Nav.Link>
                 </Nav.Item>
             )
           )}
 
 
           <Nav.Item>
-            <Nav.Link>
-              <Link to='contact' spy={true} smooth={true}>Contact Us</Link>
-            </Nav.Link> 
+            <Nav.Link><Link to='contact' spy={true} smooth={true}>Contact Us</Link></Nav.Link> 
           </Nav.Item>
 
         </Nav>

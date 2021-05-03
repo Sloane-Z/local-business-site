@@ -19,6 +19,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('Food');
 
   const scrollToDiv = (ref) => window.scrollTo({top: ref.current.offsetTop, behavior: 'smooth'});
+  const el0 = useRef();
   const el1 = useRef();
   const el2 = useRef();
   const el3 = useRef();
@@ -28,7 +29,7 @@ function App() {
     return (
     <Router>
        
-      <NavigationBar clickToScroll={()=> scrollToDiv(el2)}  selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
+      <NavigationBar reference={el0} clickToScroll={()=> scrollToDiv(el2)}  selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
       <CategorySection reference={el1} clickToScroll={()=> scrollToDiv(el2)} category = {categoryData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
       <VendorList reference={el2} selectedCategory= {selectedCategory}></VendorList>
 
