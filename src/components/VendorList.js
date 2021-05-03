@@ -99,7 +99,7 @@ export class VendorList extends React.Component{
     componentWillMount() {
         fetch('http://backend.stjohnslocalguide.com/v1/vendors')
         .then(res => res.json()).then((data) => {         
-          this.state.vendors = data.vendors;
+          this.setState({ vendors: data});
         })
         .catch(console.log);
     }
