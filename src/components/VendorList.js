@@ -97,7 +97,7 @@ export class VendorList extends React.Component{
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         fetch('http://backend.stjohnslocalguide.com/v1/vendors')
         .then(res => res.json()).then((data) => {         
           this.state.vendors = data.vendors;
@@ -108,6 +108,7 @@ export class VendorList extends React.Component{
 
     render(){
         return (
+
             (!this.state.isFetching) &&
                 <Style >
                 <ContainerWrapper ref={this.props.reference}>
@@ -137,6 +138,7 @@ export class VendorList extends React.Component{
                 </ContainerWrapper>
     
                 </Style>
+
         )
 
         
