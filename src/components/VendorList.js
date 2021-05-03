@@ -92,6 +92,7 @@ export class VendorList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            isFetching: true,
             vendors: []
         };
     }
@@ -100,13 +101,15 @@ export class VendorList extends React.Component{
         fetch('http://backend.stjohnslocalguide.com/v1/vendors')
         .then(res => res.json()).then((data) => {         
           this.state.vendors = data.vendors;
+          this.state.isFetching = false;
         })
         .catch(console.log);
     }
 
     render(){
-        return (
-            <Style >
+
+            if (!this.state.isFetching){
+                <Style >
                 <ContainerWrapper ref={this.props.reference}>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
                     <Container className= "container" >                
@@ -134,7 +137,8 @@ export class VendorList extends React.Component{
                 </ContainerWrapper>
     
                 </Style>
-        )
+            }
+
     }
     
 };
