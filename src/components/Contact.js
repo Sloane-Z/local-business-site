@@ -4,8 +4,8 @@ import emailjs from 'emailjs-com';
 import styled, { css } from 'styled-components';
 import {Row, Col, Container} from 'react-bootstrap';
 
-import {AwesomeButton,AwesomeButtonProgress,AwesomeButtonSocial,} from 'react-awesome-button';
-import "react-awesome-button/dist/styles.css";
+import {AwesomeButtonProgress} from 'react-awesome-button';
+import AwesomeButtonStyle from "react-awesome-button/dist/styles.css";
 //Icons
 import { Email } from '@styled-icons/material/Email';
 import { MapMarker} from '@styled-icons/open-iconic/MapMarker';
@@ -43,6 +43,7 @@ const Wrapper = styled.div`
     .container{
       width: 100%;
       padding: 40px;
+
     };
 
     .dividerContainer{
@@ -63,28 +64,7 @@ const Wrapper = styled.div`
         
     }
     .AwesomeButtonProgress {
-      --button-default-height: 47px !important;
-      --button-default-font-size: 14px;
-      --button-default-border-radius: 6px;
-      --button-horizontal-padding: 20px;
-      --button-raise-level: 5px;
-      --button-hover-pressure: 2;
-      --transform-speed: 0.185s;
-      --button-primary-color: #475472;
-      --button-primary-color-dark: #2a3143;
-      --button-primary-color-light: #d4d9e4;
-      --button-primary-color-hover: #424e6a;
-      --button-primary-border: none;
-      --button-secondary-color: #fffc6c !important;
-      --button-secondary-color-dark: #b9b500 !important;
-      --button-secondary-color-light: #6c6a00 !important;
-      --button-secondary-color-hover: #fffb3e;
-      --button-secondary-border: none;
-      --button-anchor-color: #f3c8ad;
-      --button-anchor-color-dark: #734922;
-      --button-anchor-color-light: #4c3016;
-      --button-anchor-color-hover: #f1bfa0;
-      --button-anchor-border: 1px solid #8c633c;
+      ${AwesomeButtonStyle};
 }
 `
 
@@ -327,11 +307,6 @@ export class Contact extends React.Component {
     })
     .catch(console.log);    
   }
-
-  componentWillUnmount() {
-    
-  }
-
 
   render() {
     return(
