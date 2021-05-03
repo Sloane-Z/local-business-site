@@ -107,8 +107,8 @@ export class VendorList extends React.Component{
     }
 
     render(){
-
-            if (!this.state.isFetching){
+        return (
+            (!this.state.isFetching) &&
                 <Style >
                 <ContainerWrapper ref={this.props.reference}>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
@@ -137,8 +137,9 @@ export class VendorList extends React.Component{
                 </ContainerWrapper>
     
                 </Style>
-            }
+        )
 
+        
     }
     
 };
