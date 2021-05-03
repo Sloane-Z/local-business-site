@@ -4,7 +4,7 @@ import emailjs from 'emailjs-com';
 import styled, { css } from 'styled-components';
 import {Row, Col, Container} from 'react-bootstrap';
 
-import {AwesomeButton,AwesomeButtonProgress,AwesomeButtonSocial,} from 'react-awesome-button';
+import {AwesomeButtonProgress} from 'react-awesome-button';
 import AwesomeButtonStyle from "react-awesome-button/dist/styles.css";
 //Icons
 import { Email } from '@styled-icons/material/Email';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {Card, CardGroup, CardDeck, Button, Container, Row, Col} from 'react-bootstrap';
@@ -88,56 +88,43 @@ const Divider = ({ ref, children }) => {
 const LinkText = styled.text`
 `
 export class VendorList extends React.Component{
-
+    
     constructor(props) {
         super(props);
-        this.state = {
-            isFetching: true,
-            vendors: []
-        };
     }
     
-    componentDidMount() {
-        fetch('http://backend.stjohnslocalguide.com/v1/vendors')
-        .then(res => res.json()).then((data) => {         
-          this.state.vendors = data.vendors;
-          this.state.isFetching = false;
-        })
-        .catch(console.log);
-    }
 
     render(){
         return (
 
-            (!this.state.isFetching) &&
-                <Style >
-                <ContainerWrapper ref={this.props.reference}>
-                    <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
-                    <Container className= "container" >                
-                        <Row className="row ">
+            <Style >
+            <ContainerWrapper ref={this.props.reference}>
+                <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
+                <Container className= "container" >                
+                    <Row className="row ">
 
-                            {this.state.vendors.map(
-                                (item, index) =>(
-                                    (this.props.selectedCategory === item.type) &&
-                                    <Card className="card col-sm-6 col-md-4 col-lg-3 " >
-                                    <Card.Img variant="top" src={item.thumbnail} />
-                                    <Card.Body>
-                                        <Card.Title>{item.title}</Card.Title>
-                                        <Card.Text>
-                                            {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
-                                        </Card.Text>
-            
-                                    </Card.Body>
-                                    </Card>                
-                                    )
-                                )                       
-                            }
+                        {this.props.vendors.map(
+                            (item, index) =>(
+                                (this.props.selectedCategory === item.type) &&
+                                <Card className="card col-sm-6 col-md-4 col-lg-3 " >
+                                <Card.Img variant="top" src={item.thumbnail} />
+                                <Card.Body>
+                                    <Card.Title>{item.title}</Card.Title>
+                                    <Card.Text>
+                                        {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
+                                    </Card.Text>
+        
+                                </Card.Body>
+                                </Card>                
+                                )
+                            )                       
+                        }
 
-                        </Row>                                               
-                    </Container>
-                </ContainerWrapper>
-    
-                </Style>
+                    </Row>                                               
+                </Container>
+            </ContainerWrapper>
+
+            </Style>
 
         )
 
