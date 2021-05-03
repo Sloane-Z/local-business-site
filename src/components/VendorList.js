@@ -92,6 +92,7 @@ export class VendorList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            selectedCategory:'',
             vendors: []
         };
     }
@@ -102,10 +103,12 @@ export class VendorList extends React.Component{
           this.setState({ vendors: data});
         })
         .catch(console.log);
+        this.setState({selectedCategory: this.props.selectedCategory});
     }
 
     render(){
         return (
+            this.state.vendors!=[] &&
             <Style >
                 <ContainerWrapper ref={this.props.reference}>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
