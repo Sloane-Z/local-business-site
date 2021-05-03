@@ -101,7 +101,7 @@ export class VendorList extends React.Component{
     componentDidMount() {
         fetch('http://backend.stjohnslocalguide.com/v1/vendors')
         .then(res => res.json()).then((data) => {         
-          this.setState({ vendors: data});
+          this.setState({ vendors: data.vendors});
           this.setState({ processing: false});
         })
         .catch(console.log);
@@ -123,18 +123,17 @@ export class VendorList extends React.Component{
                                 (item, index) =>(
                                     (this.props.selectedCategory === item.type) &&
                                     <Card className="card col-sm-6 col-md-4 col-lg-3 " >
-                                    <Card.Img variant="top" src={item.thumbnail} />
-                                    <Card.Body>
-                                        <Card.Title>{item.title}</Card.Title>
-                                        <Card.Text>
-                                            {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
-                                        </Card.Text>
-            
-                                    </Card.Body>
+                                        <Card.Img variant="top" src={item.thumbnail} />
+                                        <Card.Body>
+                                            <Card.Title>{item.title}</Card.Title>
+                                            <Card.Text>
+                                                {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
+                                            </Card.Text>
+                
+                                        </Card.Body>
                                     </Card>                
-                                    )
-                                )                       
-                            }
+                                )
+                            )}
 
                         </Row>                                               
                     </Container>
