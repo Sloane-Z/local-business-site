@@ -92,8 +92,9 @@ export class VendorList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            processing: true,
             selectedCategory:'',
-            vendors: []
+            vendors:null
         };
     }
     
@@ -101,14 +102,16 @@ export class VendorList extends React.Component{
         fetch('http://backend.stjohnslocalguide.com/v1/vendors')
         .then(res => res.json()).then((data) => {         
           this.setState({ vendors: data});
+          this.setState({ processing: false});
         })
         .catch(console.log);
         this.setState({selectedCategory: this.props.selectedCategory});
+        
     }
 
     render(){
         return (
-            this.state.vendors!=[] &&
+            !this.state.processing &&
             <Style >
                 <ContainerWrapper ref={this.props.reference}>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
