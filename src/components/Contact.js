@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 import {Row, Col, Container} from 'react-bootstrap';
 
 import {AwesomeButtonProgress} from 'react-awesome-button';
-import AwesomeButtonStyle from "react-awesome-button/dist/styles.css";
 //Icons
 import { Email } from '@styled-icons/material/Email';
 import { MapMarker} from '@styled-icons/open-iconic/MapMarker';
@@ -63,9 +62,6 @@ const Wrapper = styled.div`
         width:100%;
         
     }
-    .AwesomeButtonProgress {
-      ${AwesomeButtonStyle};
-}
 `
 
 const ContactContainer = styled.div`
@@ -377,7 +373,7 @@ export class Contact extends React.Component {
   
             <Row>
               <FormGroupSoloRight >
-                  <AwesomeButtonProgress size="large" type="primary submit"  value='send'>Send Message</AwesomeButtonProgress>
+                  <AwesomeButtonProgress size="large" type="primary submit" action={this.handleSubmit} value='send'>Send Message</AwesomeButtonProgress>
                 </FormGroupSoloRight>
             </Row>   
         </form>
