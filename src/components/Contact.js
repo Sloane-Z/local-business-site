@@ -4,7 +4,6 @@ import emailjs from 'emailjs-com';
 import styled, { css } from 'styled-components';
 import {Row, Col, Container} from 'react-bootstrap';
 
-import {AwesomeButtonProgress} from 'react-awesome-button';
 //Icons
 import { Email } from '@styled-icons/material/Email';
 import { MapMarker} from '@styled-icons/open-iconic/MapMarker';
@@ -235,16 +234,30 @@ const FormGroupSoloRight = styled.div`
   width: 100% !important;
   padding: 0;
   align-items: flex-end;
-
 `
+
 const Button = styled.button`
   width: 200px;
   height: 60px;
   cursor: pointer;
-  background: white;
-  border: none;
+  background: transparent;
+  backdrop-filter: blur(25px);
   text-transform: uppercase;
-  border-radius: 5px;
+  border: 2px; 
+  border-radius: 20px;
+  border-style: groove;
+  border-color: #b2481b;
+  transition:ease-in-out 0.3s;
+  :hover{
+    font-size: 1.1rem;
+    -webkit-box-shadow: 5px 5px 15px 2px #000000; 
+    box-shadow: 5px 5px 15px 2px #000000;
+    background: #e47b4e;
+    color: white;
+  }
+  :active{
+    color: black;
+  }
 `
 
 const Divider = ({ ref, children }) => {
@@ -373,7 +386,7 @@ export class Contact extends React.Component {
   
             <Row>
               <FormGroupSoloRight >
-                  <AwesomeButtonProgress size="large" type="primary submit" action={this.handleSubmit} value='send'>Send Message</AwesomeButtonProgress>
+                <Button type='submit' value='send'>Send Message</Button>
                 </FormGroupSoloRight>
             </Row>   
         </form>
