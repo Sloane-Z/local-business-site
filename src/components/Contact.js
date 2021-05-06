@@ -19,9 +19,9 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: 100%;
-
+    padding-bottom:2%;
     background: rgb(219,176,160);
     background: linear-gradient(0deg, rgba(219,176,160,1) 45%, rgba(224,192,192,1) 100%);
     background-size: cover;
@@ -247,7 +247,7 @@ const Button = styled.button`
   border-radius: 20px;
   border-style: groove;
   border-color: #b2481b;
-  transition:ease-in-out 0.3s;
+  transition:ease-in-out 0.2s;
   :hover{
     font-size: 1.1rem;
     -webkit-box-shadow: 5px 5px 15px 2px #000000; 
