@@ -70,7 +70,7 @@ const Divider = ({ ref, children }) => {
     if(children !== '')
     {
         return (
-            <div className="dividerContainer" ref={ref} id='vendorlist'>
+            <div className="dividerContainer" ref={ref} id='vendorList'>
               <div className="divider" />
               <span className="dividerContent">
                 {children}
