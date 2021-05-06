@@ -9,6 +9,7 @@ const Style = styled.div`
         right: 0.5rem;
         animation: fadeIn 700ms ease-in-out 1s both;
         cursor: pointer;
+        z-index:20;
     }
 `
 
