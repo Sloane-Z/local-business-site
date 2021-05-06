@@ -105,7 +105,7 @@ const Divider=styled.hr`
 export const NavigationBar = ({reference, clickToScroll, setSelectedCategory}) => {
   const onCategoryClicked = (i) => {
     setSelectedCategory(i);
-    clickToScroll();
+    //clickToScroll();
   } 
   return(
   <Styles>
@@ -121,7 +121,7 @@ export const NavigationBar = ({reference, clickToScroll, setSelectedCategory}) =
           {categoryData.map(
             (item, index) =>(
                 <Nav.Item onClick={()=>{onCategoryClicked(item.title)} }>
-                  <Nav.Link>{item.title}</Nav.Link>
+                  <Nav.Link><Link to='vendorList' spy={true} smooth={true}>{item.title}</Link></Nav.Link>
                 </Nav.Item>
             )
           )}
