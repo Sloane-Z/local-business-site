@@ -141,7 +141,7 @@ const CategorySection = ({category, selectedCategory, setSelectedCategory}) => {
                 <Grid id='category'>
                     {category.map(
                         (item, index) =>(
-                            <Link to='vendorList' spy={true} smooth={true} onClick={()=>{onCategoryClicked(item.title)}} >
+                            <Link to='vendorList' smooth={true} onClick={()=>{onCategoryClicked(item.title)}} >
                                 <Item current={item.title} selectedCategory={selectedCategory}>
                                     
                                     <CategoryImage src={item.image}></CategoryImage>

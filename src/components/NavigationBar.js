@@ -121,14 +121,14 @@ export const NavigationBar = ({setSelectedCategory}) => {
           {categoryData.map(
             (item, index) =>(
                 <Nav.Item >
-                  <Nav.Link ><Link to='vendorList' spy={true} smooth={true} onClick={()=>{onCategoryClicked(item.title)} }>{item.title} </Link></Nav.Link>
+                  <Nav.Link ><Link to='vendorList' smooth={true} onClick={()=>{onCategoryClicked(item.title)} }>{item.title} </Link></Nav.Link>
                 </Nav.Item>
             )
           )}
 
 
           <Nav.Item>
-            <Nav.Link><Link to='contact' spy={true} smooth={true}>Contact Us</Link></Nav.Link> 
+            <Nav.Link><Link to='contact'  smooth={true}>Contact Us</Link></Nav.Link> 
           </Nav.Item>
 
         </Nav>
