@@ -137,13 +137,15 @@ const CategorySection = ({reference, clickToScroll, category, selectedCategory, 
                 <Grid ref={reference} id='category'>
                     {category.map(
                         (item, index) =>(
-                            <Link to='vendorList' spy={true} smooth={true}>
+                            
                                 <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
+                                    <Link to='vendorList' spy={true} smooth={true}>
                                     <CategoryImage src={item.image}></CategoryImage>
                                     <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
-                                    <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
+                                    <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>       
+                                    </Link>  
                                 </Item>
-                            </Link>
+                           
 
                         )
                     )}
