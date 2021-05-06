@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {Card, CardGroup, CardDeck, Button, Container, Row, Col} from 'react-bootstrap';
+import {Card, Container, Row } from 'react-bootstrap';
 import { vendorList } from '../data/foodVendorList';
 const Style = styled.div`
     background: rgb(224,192,192);
@@ -115,7 +115,7 @@ export class VendorList extends React.Component{
             !this.state.processing ? 
             (
             <Style >
-                <ContainerWrapper ref={this.props.reference}>
+                <ContainerWrapper>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
                     <Container className= "container" >                
                         <Row className="row ">

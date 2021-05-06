@@ -1,13 +1,17 @@
-import React, { useRef } from 'react'
-import styled, { css } from 'styled-components';
+import React from 'react'
+import styled from 'styled-components';
 import { Container } from 'react-bootstrap';
-import {Link} from 'react-scroll';
+import { Link } from 'react-scroll';
 
 export const Style = styled.div`
     font-family: 'Poppins', sans-serif;
     background-color: #fef3e9;
     .container{
         padding-top:5%;
+    }
+    .link{
+        height:100%;
+        width:100%;
     }
 `
 
@@ -85,7 +89,8 @@ export const Item = styled.div`
     align-items: flex-end;
     overflow: hidden;
     padding: 1rem;
-    width: 100%;
+    height:100%;
+    width:100%;
     border-radius:10px;
     border: 2px solid #ccc;
     
@@ -125,27 +130,26 @@ const CategoryDescription = styled.div`
 `
 
 
-const CategorySection = ({reference, clickToScroll, category, selectedCategory, setSelectedCategory}) => {
+const CategorySection = ({category, selectedCategory, setSelectedCategory}) => {
     const onCategoryClicked = (i) => {
         setSelectedCategory(i);
-        //clickToScroll();
     } 
 
     return (       
         <Style>
             <Container>
-                <Grid ref={reference} id='category'>
+                <Grid id='category'>
                     {category.map(
                         (item, index) =>(
-                            
-                                <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
-                                    <Link to='vendorList' spy={true} smooth={true}>
+                            <Link to='vendorList' spy={true} smooth={true} onClick={()=>{onCategoryClicked(item.title)}} >
+                                <Item current={item.title} selectedCategory={selectedCategory}>
+                                    
                                     <CategoryImage src={item.image}></CategoryImage>
                                     <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
                                     <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>       
-                                    </Link>  
+                                    
                                 </Item>
-                           
+                            </Link>  
 
                         )
                     )}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Icons
 import { Facebook } from '@styled-icons/bootstrap/Facebook';

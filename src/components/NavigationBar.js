@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-scroll';
+import { Link } from 'react-scroll';
 import { Nav, Navbar } from 'react-bootstrap';
 import { categoryData } from '../data/categoryData';
 
@@ -102,7 +102,7 @@ const Divider=styled.hr`
     color: black;
 `
 
-export const NavigationBar = ({reference, clickToScroll, setSelectedCategory}) => {
+export const NavigationBar = ({setSelectedCategory}) => {
   const onCategoryClicked = (i) => {
     setSelectedCategory(i);
     //clickToScroll();
@@ -112,7 +112,7 @@ export const NavigationBar = ({reference, clickToScroll, setSelectedCategory}) =
     <Wrapper>
        
     <Navbar expand="lg">
-      <Navbar.Brand href="/" ref={reference}>St.John's Local Guide</Navbar.Brand>
+      <Navbar.Brand href="/" >St.John's Local Guide</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
 
