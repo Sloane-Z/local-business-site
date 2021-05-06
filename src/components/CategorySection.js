@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import styled, { css } from 'styled-components';
 import { Container } from 'react-bootstrap';
-
+import {Link} from 'react-scroll';
 
 export const Style = styled.div`
     font-family: 'Poppins', sans-serif;
@@ -128,7 +128,7 @@ const CategoryDescription = styled.div`
 const CategorySection = ({reference, clickToScroll, category, selectedCategory, setSelectedCategory}) => {
     const onCategoryClicked = (i) => {
         setSelectedCategory(i);
-        clickToScroll();
+        //clickToScroll();
     } 
 
     return (       
@@ -137,11 +137,14 @@ const CategorySection = ({reference, clickToScroll, category, selectedCategory, 
                 <Grid ref={reference} id='category'>
                     {category.map(
                         (item, index) =>(
-                            <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
-                                <CategoryImage src={item.image}></CategoryImage>
-                                <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
-                                <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
-                            </Item>
+                            <Link to='vendorList' spy={true} smooth={true}>
+                                <Item onClick={()=>{onCategoryClicked(item.title)} } current={item.title} selectedCategory={selectedCategory}>
+                                    <CategoryImage src={item.image}></CategoryImage>
+                                    <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
+                                    <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>         
+                                </Item>
+                            </Link>
+
                         )
                     )}
                 </Grid>

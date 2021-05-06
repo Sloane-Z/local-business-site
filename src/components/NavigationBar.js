@@ -121,7 +121,7 @@ export const NavigationBar = ({reference, clickToScroll, setSelectedCategory}) =
           {categoryData.map(
             (item, index) =>(
                 <Nav.Item >
-                  <Nav.Link ><Link to='vendorList' spy={true} smooth={true}>{item.title} onClick={()=>{onCategoryClicked(item.title)} }</Link></Nav.Link>
+                  <Nav.Link ><Link to='vendorList' spy={true} smooth={true} onClick={()=>{onCategoryClicked(item.title)} }>{item.title} </Link></Nav.Link>
                 </Nav.Item>
             )
           )}
