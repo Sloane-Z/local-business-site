@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Router, Route, Switch, Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { compose, withProps } from "recompose"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 // Components
 import { NavigationBar } from './NavigationBar';
 import  ScrollToTop  from'./ScrollToTop';
@@ -15,15 +16,20 @@ import { Telephone } from '@styled-icons/foundation/Telephone';
 import { Facebook } from '@styled-icons/bootstrap/Facebook';
 import { Instagram } from '@styled-icons/boxicons-logos/Instagram';
 import { Twitter } from '@styled-icons/bootstrap/Twitter';
+import { Link as LinkStyledIcon } from '@styled-icons/boxicons-regular/Link';
 
 const Wrapper = styled.div`
 
+  font-family: 'Poppins', sans-serif;
+  background: rgb(224,192,192);
+  background: linear-gradient(0deg, rgba(224,192,192,1) 45%, rgba(254,243,233,1) 100%);
 `
 const LandingImage = styled.div`
     position: relative;
     height: 300px;
     width: 100%;
     background: url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);
+    background-repeat:none;
 `
 const TitleWrapper = styled.div`
     position: relative;
@@ -34,8 +40,9 @@ const TitleWrapper = styled.div`
 `
 
 const TitleDiv = styled.div`
-    transform: translateY(-50%) translatex(70%);
-    width: 30%;
+    transform: translateY(-50%);
+    width: 50%;
+    margin: 0 auto;
     padding: 2px 10px ;
     backdrop-filter: blur(25px);
     font-style: italic;
@@ -48,36 +55,40 @@ const TitleDiv = styled.div`
 `
 
 const IconText = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
+
+  margin-right: 1.5rem;
   .fa{
     flex: 0 1 20px;
     font-size: 1.8rem;
     margin-right: 2rem;
   }
   span{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 300;
   }
-  margin-bottom: 1rem;
-  margin-left: 1.5rem;
+
 `
 const PhoneIcon = styled(Telephone)`
     flex: 0 1 20px;
     font-size: 1.8rem;
-    margin-right: 1rem;
+    margin-right: 0.3rem;
 `
 
 const EmailIcon = styled(Email)`
     flex: 0 1 20px;
     font-size: 1.8rem;
-    margin-right: 1rem;
+    margin-right: 0.3rem;
 `
 const MapMarkerIcon = styled(MapMarker)`
     flex: 0 1 20px;
     font-size: 1.8rem;
-    margin-right: 1rem;
+    margin-right: 0.3rem;
+`
+
+const LinkIcon = styled(LinkStyledIcon)`
+    flex: 0 1 20px;
+    font-size: 1.8rem;
+    margin-right: 0.3rem;
 `
 const FacebookIcon = styled(Facebook)`
   font-size: 35px;
@@ -88,9 +99,56 @@ const InsIcon = styled(Instagram)`
 const TwitterIcon = styled(Twitter)`
   font-size: 35px;
 `
-const ContentWrapper = styled.div`
-
+const LinkContent = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 `
+
+const DescriptionWrapper = styled.div`
+  padding: 0 2%;
+  width: 50%;
+`
+const DescriptionTitle = styled.div`
+  font-family: 'Poppins', sans-serif;
+  font-size:1.5rem;
+  font-style: bold;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+`
+const Description = styled.div`
+  font-family: 'Poppins', sans-serif;
+`
+
+// Google Map 
+const MapWrapper = styled.div`
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  width: 50%;
+`
+const MyMapComponent = compose(
+  withProps({
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />,
+  }),
+  withScriptjs,
+  withGoogleMap
+)((props) =>
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />}
+  </GoogleMap>
+)
+
+const PageWrapper = styled.div`
+  display: flex;
+`
+
 export class Vendor extends React.Component{
     constructor(props) {
         super(props);
@@ -105,16 +163,29 @@ export class Vendor extends React.Component{
                 <Wrapper>
                     <LandingImage></LandingImage>                   
                     <TitleDiv>Cabbage Lady Reds</TitleDiv>
-                    
+                    <LinkContent>
+                      <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
+                      <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
+                      <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
+                      <IconText> <LinkIcon size='25' aria-hidden ='true'/><span>www.google.com</span></IconText>
+                    </LinkContent>
+                   <PageWrapper>
+                    <DescriptionWrapper>
+                        <DescriptionTitle>Details</DescriptionTitle>
+                        <Description>When you’re craving delicious pizza cooked fresh and brought right to your door, call Greco Pizza in St John’s. We have a many different types of pizza including gluten free and vegetarian options, and our menu also features donairs, egg rolls, subs, garlic fingers, wings, salad and drinks.</Description>
+                      </DescriptionWrapper>
+                      <MapWrapper>
+                        <MyMapComponent
+                          isMarkerShown={true}
+                          onMarkerClick={false}
+                        />
+                      </MapWrapper>
+                   </PageWrapper>
 
- 
-                    <ContentWrapper>
-                    <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
-                    <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
-                    <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
-                    </ContentWrapper>
-                </Wrapper>
+
                 <Footer/>
+                </Wrapper>
+
             </>
         )
 
