@@ -112,7 +112,8 @@ export class VendorList extends React.Component{
     render(){
         return (
 
-
+            !this.state.processing?
+            (
             <Style >
                 <ContainerWrapper>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
@@ -140,7 +141,7 @@ export class VendorList extends React.Component{
                 </ContainerWrapper>
     
                 </Style>
-                
+            ):<></>
         )
     }
     
