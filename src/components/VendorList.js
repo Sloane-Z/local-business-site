@@ -99,7 +99,7 @@ export class VendorList extends React.Component{
     }
     
     componentDidMount() {
-        fetch('http://backend.stjohnslocalguide.com/v1/vendors')
+        fetch('https://backend.stjohnslocalguide.com/v1/vendors')
         .then(res => res.json()).then((data) => {         
           this.setState({ vendors: data.vendors});
           this.setState({ processing: false});
@@ -112,8 +112,7 @@ export class VendorList extends React.Component{
     render(){
         return (
 
-            !this.state.processing ? 
-            (
+
             <Style >
                 <ContainerWrapper>
                     <Divider ><h3>{this.props.selectedCategory}</h3></Divider>
@@ -126,7 +125,7 @@ export class VendorList extends React.Component{
                                     <Card className="card col-sm-6 col-md-4 col-lg-3 " >
                                         <Card.Img variant="top" src={item.thumbnail} />
                                         <Card.Body>
-                                            <Card.Title>{item.title}</Card.Title>
+                                            <Card.Title><Link to='/vendor'>{item.title}</Link></Card.Title>
                                             <Card.Text>
                                                 {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
                                             </Card.Text>
@@ -141,7 +140,7 @@ export class VendorList extends React.Component{
                 </ContainerWrapper>
     
                 </Style>
-                ):<></>
+                
         )
     }
     
