@@ -284,8 +284,6 @@ function findValue(JSON_obj, targetKey){
 
 }
 
-
-
 export class Contact extends React.Component {
   constructor(props) {
     super(props);
@@ -294,27 +292,53 @@ export class Contact extends React.Component {
       emailAPIKey: []
   };
   }
-
-
   
   handleSubmit = (e) => {
     e.preventDefault(); // Prevents default refresh by the browser
-    emailjs.sendForm(findValue(this.state.emailAPIKey.emailAPIKey,"SERVICE_ID"), findValue(this.state.emailAPIKey.emailAPIKey,"TEMPLATE_ID"), e.target, findValue(this.state.emailAPIKey.emailAPIKey,"USER_ID"))
+    var SERVICE_ID ='';
+    var TEMPLATE_ID ='';
+    var USER_ID ='';
+    this.state.emailAPIKey.map((item, index) =>{
+      if (item.key == 'SERVICE_ID'){
+        SERVICE_ID = item.value;
+
+      }
+      else if (item.key =='TEMPLATE_ID'){
+        TEMPLATE_ID = item.value;
+      }
+      else if (item.key == 'USER_ID'){
+        USER_ID = item.value;
+
+      }
+      if (index == this.state.emailAPIKey.length-1)
+      {
+        emailjs.sendForm(SERVICE_ID,TEMPLATE_ID, e.target, USER_ID)
         .then((result) => {
             alert("Message Sent!");
         }, (error) => {
-            console.log(error.text);
+            //console.log(error.text);
         });
+      }
+    }
+    );
 
-};
 
+  };
 
   componentDidMount() {
-    fetch('https://backend.stjohnslocalguide.com/v1/emailAPIKey')
+    /*
+    fetch('http://localhost:5000/email')
     .then(res => res.json()).then((data) => {
       this.state.emailAPIKey = data;
     })
     .catch(console.log);    
+    */
+    fetch('https://backend.stjohnslocalguide.com/email')
+    .then(res => res.json()).then((data) => {
+      this.state.emailAPIKey = data;
+    })
+    .catch(console.log);    
+    
   }
 
   render() {
@@ -390,7 +414,7 @@ export class Contact extends React.Component {
                 </FormGroupSoloRight>
             </Row>   
         </form>
-  
+
         </Container>
   
       </ContactContainer>

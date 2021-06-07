@@ -23,6 +23,7 @@ const Style = styled.div`
         transition: 0.3s ease-in-out;
         -webkit-transition : all 0.3s ease-out;
         background-color:transparent;
+        word-wrap: normal;
         .card-title{
             :hover{
                 text-decoration:underline;
@@ -87,6 +88,8 @@ const Divider = ({ ref, children }) => {
 
 const LinkText = styled.text`
 `
+
+
 export class VendorList extends React.Component{
 
     constructor(props) {
@@ -96,17 +99,27 @@ export class VendorList extends React.Component{
             selectedCategory:'',
             vendors:[]
         };
+
     }
     
     componentDidMount() {
-        fetch('https://backend.stjohnslocalguide.com/v1/vendors')
+        /*
+        fetch('http://localhost:5000/vendors')
+        
         .then(res => res.json()).then((data) => {         
           this.setState({ vendors: data.vendors});
           this.setState({ processing: false});
         })
         .catch(console.log);
         this.setState({selectedCategory: this.props.selectedCategory});
-        
+        */
+        fetch('https://backend.stjohnslocalguide.com/vendors')
+        .then(res => res.json()).then((data) => {       
+            this.setState({ vendors: data});
+            this.setState({ processing: false});  
+        })
+        .catch(console.log);
+        this.setState({selectedCategory: this.props.selectedCategory});
     }
 
     render(){
@@ -123,10 +136,10 @@ export class VendorList extends React.Component{
                             {this.state.vendors.map(
                                 (item, index) =>(
                                     (this.props.selectedCategory === item.type) &&
-                                    <Card className="card col-sm-6 col-md-4 col-lg-3 " >
-                                        <Card.Img variant="top" src={item.thumbnail} />
+                                    <Card className="col-sm-6 col-md-4 col-lg-3">
+                                        <Card.Img variant="top" src={item.image} />
                                         <Card.Body>
-                                            <Card.Title><Link to='/vendor'>{item.title}</Link></Card.Title>
+                                            <Card.Title><Link to='/vendor'>{item.name}</Link></Card.Title>
                                             <Card.Text>
                                                 {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
                                             </Card.Text>
