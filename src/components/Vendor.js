@@ -148,21 +148,58 @@ const MyMapComponent = compose(
 const PageWrapper = styled.div`
   display: flex;
 `
+function findValue(JSON_obj, targetKey){
+  for (var x in JSON_obj){
+    if (JSON_obj[x].key == targetKey){
+      return JSON_obj[x].value;
+    }
+  }
+}
+
+function findSKUBasedOnID(JSON_obj, targetValue){
+  return JSON_obj;
+}
+
 
 export class Vendor extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-
+          vendors:[],
+          processing:true,
         };
     }
+    componentDidMount() {
+        
+      fetch('http://localhost:5000/vendors')        
+      .then(res => res.json()).then((data) => {         
+        this.setState({ vendors: data});
+        this.setState({ processing: false});
+      })
+      .catch(console.log);
+      console.log(this.props.selectedVendor);
+      
+      console.log(findSKUBasedOnID(this.state.vendors, this.props.selectedVendor));
+     /*
+      fetch('https://backend.stjohnslocalguide.com/vendors')
+      .then(res => res.json()).then((data) => {       
+          this.setState({ vendors: data});
+          this.setState({ processing: false});  
+      })
+      .catch(console.log);
+      this.setState({selectedCategory: this.props.selectedCategory});
+      */
+  }
     render(){
+
         return(
+          !this.state.processing?
+          (
             <>
                 <NavigationBar/>
                 <Wrapper>
                     <LandingImage></LandingImage>                   
-                    <TitleDiv>Cabbage Lady Reds</TitleDiv>
+                    <TitleDiv>{findValue(findSKUBasedOnID(this.state.vendors, this.props.selectedVendor),'name')}</TitleDiv>
                     <LinkContent>
                       <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
                       <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
@@ -185,8 +222,8 @@ export class Vendor extends React.Component{
 
                 <Footer/>
                 </Wrapper>
-
             </>
+          ):<></>
         )
 
     }
