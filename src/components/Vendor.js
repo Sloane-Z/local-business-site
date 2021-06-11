@@ -148,26 +148,57 @@ const MyMapComponent = compose(
 const PageWrapper = styled.div`
   display: flex;
 `
+function findValue(JSON_obj, targetKey){
+  for (var x in JSON_obj){
+    if (JSON_obj[x].key == targetKey){
+      return JSON_obj[x].value;
+    }
+  }
+}
+
+function findSKUBasedOnID(JSON_obj, targetValue){
+  for (var x in JSON_obj){
+    if (JSON_obj[x].id == targetValue){
+      return JSON_obj[x];
+    }
+  }
+}
+
 
 export class Vendor extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-
+          vendor:[],        
+          processing:true,
         };
     }
+    componentDidMount() {
+      //fetch('http://localhost:5000/vendors')        
+      fetch('https://backend.stjohnslocalguide.com/vendors')        
+      .then(res => res.json())
+      .then((data) => {            
+        console.log(data);     
+        this.setState({ vendor: findSKUBasedOnID(data, ((this.props.selectedVendor===''||undefined)?window.location.pathname.substring(1):this.props.selectedVendor)) });
+      })
+      .then(this.setState({ processing: false}))
+      .catch(console.log);   
+  }
     render(){
+
         return(
+          !this.state.processing?
+          (
             <>
                 <NavigationBar/>
                 <Wrapper>
                     <LandingImage></LandingImage>                   
-                    <TitleDiv>Cabbage Lady Reds</TitleDiv>
+                    <TitleDiv>{this.state.vendor.name}</TitleDiv>
                     <LinkContent>
-                      <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
-                      <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
-                      <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
-                      <IconText> <LinkIcon size='25' aria-hidden ='true'/><span>www.google.com</span></IconText>
+                      <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>{(this.state.vendor.phoneNumber==undefined)?'':this.state.vendor.phoneNumber}</span></IconText>
+                      <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.email==undefined)?'':this.state.vendor.email}</span></IconText>
+                      <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.address==undefined)?'':this.state.vendor.address}</span></IconText>
+                      <IconText> <LinkIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.website==undefined)?'':this.state.vendor.website}</span></IconText>
                     </LinkContent>
                    <PageWrapper>
                     <DescriptionWrapper>
@@ -185,9 +216,9 @@ export class Vendor extends React.Component{
 
                 <Footer/>
                 </Wrapper>
-
             </>
+          ):<></>
         )
 
     }
-}
+};

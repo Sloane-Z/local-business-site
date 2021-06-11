@@ -104,22 +104,19 @@ export class VendorList extends React.Component{
     
     componentDidMount() {
         /*
-        fetch('http://localhost:5000/vendors')
-        
+        fetch('http://localhost:5000/vendors')        
         .then(res => res.json()).then((data) => {         
-          this.setState({ vendors: data.vendors});
+          this.setState({ vendors: data});
           this.setState({ processing: false});
         })
         .catch(console.log);
-        this.setState({selectedCategory: this.props.selectedCategory});
         */
-        fetch('https://backend.stjohnslocalguide.com/vendors')
-        .then(res => res.json()).then((data) => {       
-            this.setState({ vendors: data});
-            this.setState({ processing: false});  
+        fetch('https://backend.stjohnslocalguide.com/vendors')        
+        .then(res => res.json()).then((data) => {         
+          this.setState({ vendors: data});
+          this.setState({ processing: false});
         })
         .catch(console.log);
-        this.setState({selectedCategory: this.props.selectedCategory});
     }
 
     render(){
@@ -139,7 +136,7 @@ export class VendorList extends React.Component{
                                     <Card className="col-sm-6 col-md-4 col-lg-3">
                                         <Card.Img variant="top" src={item.image} />
                                         <Card.Body>
-                                            <Card.Title><Link to='/vendor'>{item.name}</Link></Card.Title>
+                                            <Card.Title><Link to={"/"+item.id} onClick={()=>{this.props.setSelectedVendor(item.id);console.log(this.props.selectedVendor)}}>{item.name}</Link></Card.Title>
                                             <Card.Text>
                                                 {item.description} <LinkText><Link to = "/">More...</Link></LinkText>
                                             </Card.Text>

@@ -19,22 +19,22 @@ import { vendorList } from './data/foodVendorList';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('Food');
-
+  const [selectedVendor, setSelectedVendor] = useState('');
     return (
     <Router>
        <Switch>
          <Route exact path='/'>
             <NavigationBar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
             <CategorySection category = {categoryData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
-            <VendorList selectedCategory= {selectedCategory}></VendorList>
+            <VendorList selectedCategory= {selectedCategory} selectedVendor={selectedVendor} setSelectedVendor={setSelectedVendor}></VendorList>
 
             <Contact/>
             <ScrollToTop/>
             <Footer/>
           </Route>
 
-          <Route path='/vendor'>
-            <Vendor/>
+          <Route path= {"/"+selectedVendor}>
+            <Vendor selectedVendor={selectedVendor}/>
           </Route>
        </Switch>
 
