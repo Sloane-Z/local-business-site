@@ -157,7 +157,11 @@ function findValue(JSON_obj, targetKey){
 }
 
 function findSKUBasedOnID(JSON_obj, targetValue){
-  return JSON_obj;
+  for (var x in JSON_obj){
+    if (JSON_obj[x].id == targetValue){
+      return JSON_obj[x];
+    }
+  }
 }
 
 
@@ -165,30 +169,20 @@ export class Vendor extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          vendors:[],
+          vendor:[],        
           processing:true,
         };
     }
     componentDidMount() {
-        
-      fetch('http://localhost:5000/vendors')        
-      .then(res => res.json()).then((data) => {         
-        this.setState({ vendors: data});
-        this.setState({ processing: false});
+      //fetch('http://localhost:5000/vendors')        
+      fetch('https://backend.stjohnslocalguide.com/vendors')        
+      .then(res => res.json())
+      .then((data) => {            
+        console.log(data);     
+        this.setState({ vendor: findSKUBasedOnID(data, ((this.props.selectedVendor===''||undefined)?window.location.pathname.substring(1):this.props.selectedVendor)) });
       })
-      .catch(console.log);
-      console.log(this.props.selectedVendor);
-      
-      console.log(findSKUBasedOnID(this.state.vendors, this.props.selectedVendor));
-     /*
-      fetch('https://backend.stjohnslocalguide.com/vendors')
-      .then(res => res.json()).then((data) => {       
-          this.setState({ vendors: data});
-          this.setState({ processing: false});  
-      })
-      .catch(console.log);
-      this.setState({selectedCategory: this.props.selectedCategory});
-      */
+      .then(this.setState({ processing: false}))
+      .catch(console.log);   
   }
     render(){
 
@@ -199,12 +193,12 @@ export class Vendor extends React.Component{
                 <NavigationBar/>
                 <Wrapper>
                     <LandingImage></LandingImage>                   
-                    <TitleDiv>{findValue(findSKUBasedOnID(this.state.vendors, this.props.selectedVendor),'name')}</TitleDiv>
+                    <TitleDiv>{this.state.vendor.name}</TitleDiv>
                     <LinkContent>
-                      <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
-                      <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
-                      <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
-                      <IconText> <LinkIcon size='25' aria-hidden ='true'/><span>www.google.com</span></IconText>
+                      <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>{(this.state.vendor.phoneNumber==undefined)?'':this.state.vendor.phoneNumber}</span></IconText>
+                      <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.email==undefined)?'':this.state.vendor.email}</span></IconText>
+                      <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.address==undefined)?'':this.state.vendor.address}</span></IconText>
+                      <IconText> <LinkIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.website==undefined)?'':this.state.vendor.website}</span></IconText>
                     </LinkContent>
                    <PageWrapper>
                     <DescriptionWrapper>
@@ -227,4 +221,4 @@ export class Vendor extends React.Component{
         )
 
     }
-}
+};

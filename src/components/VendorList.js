@@ -103,24 +103,20 @@ export class VendorList extends React.Component{
     }
     
     componentDidMount() {
-        
+        /*
         fetch('http://localhost:5000/vendors')        
         .then(res => res.json()).then((data) => {         
           this.setState({ vendors: data});
           this.setState({ processing: false});
         })
         .catch(console.log);
-        this.setState({selectedCategory: this.props.selectedCategory});
-        
-       /*
-        fetch('https://backend.stjohnslocalguide.com/vendors')
-        .then(res => res.json()).then((data) => {       
-            this.setState({ vendors: data});
-            this.setState({ processing: false});  
+        */
+        fetch('https://backend.stjohnslocalguide.com/vendors')        
+        .then(res => res.json()).then((data) => {         
+          this.setState({ vendors: data});
+          this.setState({ processing: false});
         })
         .catch(console.log);
-        this.setState({selectedCategory: this.props.selectedCategory});
-        */
     }
 
     render(){
