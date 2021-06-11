@@ -113,11 +113,12 @@ export class VendorList extends React.Component{
         */
         fetch('https://backend.stjohnslocalguide.com/vendors')        
         .then(res => res.json()).then((data) => {         
+          this.setState({selectedCategory:this.props.selectedCategory});
           this.setState({ vendors: data});
           this.setState({ processing: false});
         })
         .catch(console.log);
-        this.setState({selectedCategory:this.props.selectedCategory});
+        
     }
 
     render(){
