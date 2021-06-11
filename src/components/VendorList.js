@@ -117,6 +117,7 @@ export class VendorList extends React.Component{
           this.setState({ processing: false});
         })
         .catch(console.log);
+        this.setState({selectedCategory:this.props.selectedCategory});
     }
 
     render(){
