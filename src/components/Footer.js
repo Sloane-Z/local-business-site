@@ -84,9 +84,9 @@ export const Footer = () => (
         <div className='decoration'></div>
         <div className='links'>
             
-            <Link><IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle></Link>
-            <Link><IconCircle href='#' > <InsIcon size = '25' aria-hidden ='true'/></IconCircle></Link>
-            <Link><IconCircle href='#' > <TwitterIcon size = '25' aria-hidden ='true'/></IconCircle></Link>
+            <Link to='/'><IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle></Link>
+            <Link to='/'><IconCircle href='#' > <InsIcon size = '25' aria-hidden ='true'/></IconCircle></Link>
+            <Link to='/'><IconCircle href='#' > <TwitterIcon size = '25' aria-hidden ='true'/></IconCircle></Link>
             <small>Copyright 2021, St.John's Local Guide</small>    
         </div>
 

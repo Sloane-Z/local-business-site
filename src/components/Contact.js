@@ -175,16 +175,6 @@ const IconCircle = styled.a`
 
 `
 
-const Form = styled.form`
-  width: 100%;
-  padding: 40px;
-  .col{
-    display: flex;
-    width: 50%;
-    flex: 0 0 100%;
-  }
-`
-
 const FormStyle = css`
   display: flex;
   justify-content: flex-start;
@@ -275,14 +265,6 @@ const Divider = ({ ref, children }) => {
 
 };
 
-function findValue(JSON_obj, targetKey){
-  for (var x in JSON_obj){
-    if (JSON_obj[x].key === targetKey){
-      return JSON_obj[x].value;
-    }
-  }
-
-}
 
 export class Contact extends React.Component {
   constructor(props) {
@@ -298,19 +280,19 @@ export class Contact extends React.Component {
     var SERVICE_ID ='';
     var TEMPLATE_ID ='';
     var USER_ID ='';
-    this.state.emailAPIKey.map((item, index) =>{
-      if (item.key == 'SERVICE_ID'){
+    this.state.emailAPIKey.map((item, index) => {
+      if (item.key === 'SERVICE_ID'){
         SERVICE_ID = item.value;
 
       }
-      else if (item.key =='TEMPLATE_ID'){
+      else if (item.key ==='TEMPLATE_ID'){
         TEMPLATE_ID = item.value;
       }
-      else if (item.key == 'USER_ID'){
+      else if (item.key === 'USER_ID'){
         USER_ID = item.value;
 
       }
-      if (index == this.state.emailAPIKey.length-1)
+      if (index === this.state.emailAPIKey.length-1)
       {
         emailjs.sendForm(SERVICE_ID,TEMPLATE_ID, e.target, USER_ID)
         .then((result) => {
@@ -326,16 +308,11 @@ export class Contact extends React.Component {
   };
 
   componentDidMount() {
-    /*
-    fetch('http://localhost:5000/email')
-    .then(res => res.json()).then((data) => {
-      this.state.emailAPIKey = data;
-    })
-    .catch(console.log);    
-    */
+    //fetch('http://localhost:5000/email')
+    //fetch('https://backend.stjohnslocalguide.com/email')
     fetch('https://backend.stjohnslocalguide.com/email')
     .then(res => res.json()).then((data) => {
-      this.state.emailAPIKey = data;
+      this.setState( {emailAPIKey: data });
     })
     .catch(console.log);    
     
@@ -355,8 +332,7 @@ export class Contact extends React.Component {
             <p>Fill up the form and our Team will get back to you within 24 hours.</p>
   
             <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
-            <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>admin@mocca.com</span></IconText>
-            <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>435 Grand Ave, Ridgewood, NY 123</span></IconText>
+            <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>stjohnslocalguide@gmail.com</span></IconText>
   
             <SocialMedia>
               <IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle>

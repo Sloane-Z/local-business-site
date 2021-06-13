@@ -13,7 +13,7 @@ import { Vendor } from './components/Vendor';
 
 // Data
 import { categoryData } from './data/categoryData';
-import { vendorList } from './data/foodVendorList';
+
 
 
 

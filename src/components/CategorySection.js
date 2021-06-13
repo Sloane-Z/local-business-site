@@ -8,6 +8,8 @@ export const Style = styled.div`
     background-color: #fef3e9;
     .container{
         padding-top:5%;
+
+
     }
     .link{
         height:100%;
@@ -21,9 +23,13 @@ export const Grid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 350px;
     grid-gap: 60px;
+    position: relative;
     @media screen and (max-width: 768px){
         grid-template-columns: 1fr;
         grid-template-rows: 350px 350px 350px;
+        margin-top:5%;
+        margin-left: 5%;
+        margin-right:5%;
     }
 
 `;
@@ -74,9 +80,7 @@ const CategoryTitle = styled.div`
 `
 export const Item = styled.div`
     display: flex;
-    box-sizing: border-box;
-    padding: .5rem;
-
+    box-sizing: border-box;    
     position: relative;
     justify-content: center;
     align-items: center;
@@ -93,7 +97,7 @@ export const Item = styled.div`
     width:100%;
     border-radius:10px;
     border: 2px solid #ccc;
-    
+
     :hover{
         box-shadow:6px 11px 15px 4px rgba(0,0,0,0.82);
         transition-timing-function: ease-in-out;
@@ -141,12 +145,12 @@ const CategorySection = ({category, selectedCategory, setSelectedCategory}) => {
                 <Grid id='category'>
                     {category.map(
                         (item, index) =>(
-                            <Link to='vendorList' smooth={true} onClick={()=>{onCategoryClicked(item.title)}} >
+                            <Link key={index} to='vendorList' smooth={true} onClick={()=>{onCategoryClicked(item.title)}} >
                                 <Item current={item.title} selectedCategory={selectedCategory}>
                                     
                                     <CategoryImage src={item.image}></CategoryImage>
                                     <CategoryTitle><h1>{item.title}</h1></CategoryTitle>
-                                    <CategoryDescription><p>{item.paragraph}</p></CategoryDescription>       
+                                        
                                     
                                 </Item>
                             </Link>  

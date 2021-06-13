@@ -1,12 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Router, Route, Switch, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 // Components
 import { NavigationBar } from './NavigationBar';
-import  ScrollToTop  from'./ScrollToTop';
-import { Contact } from './Contact';
 import { Footer } from './Footer';
 
 //Icons
@@ -148,17 +145,10 @@ const MyMapComponent = compose(
 const PageWrapper = styled.div`
   display: flex;
 `
-function findValue(JSON_obj, targetKey){
-  for (var x in JSON_obj){
-    if (JSON_obj[x].key == targetKey){
-      return JSON_obj[x].value;
-    }
-  }
-}
 
 function findSKUBasedOnID(JSON_obj, targetValue){
   for (var x in JSON_obj){
-    if (JSON_obj[x].id == targetValue){
+    if (JSON_obj[x].id === targetValue){
       return JSON_obj[x];
     }
   }
@@ -174,11 +164,11 @@ export class Vendor extends React.Component{
         };
     }
     componentDidMount() {
-      //fetch('http://localhost:5000/vendors')        
-      fetch('https://backend.stjohnslocalguide.com/vendors')        
+      //fetch('http://localhost:5000/vendors')
+      //fetch('https://backend.stjohnslocalguide.com/vendors')            
+      fetch('https://backend.stjohnslocalguide.com/vendors')     
       .then(res => res.json())
-      .then((data) => {            
-        console.log(data);     
+      .then((data) => {               
         this.setState({ vendor: findSKUBasedOnID(data, ((this.props.selectedVendor===''||undefined)?window.location.pathname.substring(1):this.props.selectedVendor)) });
       })
       .then(this.setState({ processing: false}))
@@ -195,10 +185,10 @@ export class Vendor extends React.Component{
                     <LandingImage></LandingImage>                   
                     <TitleDiv>{this.state.vendor.name}</TitleDiv>
                     <LinkContent>
-                      <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>{(this.state.vendor.phoneNumber==undefined)?'':this.state.vendor.phoneNumber}</span></IconText>
-                      <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.email==undefined)?'':this.state.vendor.email}</span></IconText>
-                      <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.address==undefined)?'':this.state.vendor.address}</span></IconText>
-                      <IconText> <LinkIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.website==undefined)?'':this.state.vendor.website}</span></IconText>
+                      <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>{(this.state.vendor.phoneNumber===undefined)?'':this.state.vendor.phoneNumber}</span></IconText>
+                      <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.email===undefined)?'':this.state.vendor.email}</span></IconText>
+                      <IconText> <MapMarkerIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.address===undefined)?'':this.state.vendor.address}</span></IconText>
+                      <IconText> <LinkIcon size='25' aria-hidden ='true'/><span>{(this.state.vendor.website===undefined)?'':this.state.vendor.website}</span></IconText>
                     </LinkContent>
                    <PageWrapper>
                     <DescriptionWrapper>
