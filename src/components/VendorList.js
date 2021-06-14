@@ -117,7 +117,7 @@ export class VendorList extends React.Component{
     componentDidMount() {
         //fetch('https://backend.stjohnslocalguide.com/vendors')  
         //fetch('http://localhost:5000/vendors') 
-        fetch('https://backend.stjohnslocalguide.com/vendors')              
+        fetch('https://backend.stjohnslocalguide.com/vendors')            
         .then(res => res.json()).then((data) => {         
           
           this.setState({ vendors: data});
@@ -144,7 +144,7 @@ export class VendorList extends React.Component{
                                     <Card key ={index} className="col-sm-6 col-md-4 col-lg-3">
                                         <Card.Img variant="top" src={item.image} />
                                         <Card.Body>
-                                            <Card.Title><Link className='Link' to={"/"+item.id} onClick={()=>{this.props.setSelectedVendor(item.id)}}>{item.name}</Link></Card.Title>
+                                            <Card.Title><Link className='Link' to={"/"+item.id} target="_blank" rel="noopener noreferrer" onClick={()=>{this.props.setSelectedVendor(item.id)}}>{item.name}</Link></Card.Title>
                                             <Card.Text>
                                                 {item.description}...
                                             </Card.Text>

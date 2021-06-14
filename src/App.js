@@ -33,7 +33,7 @@ function App() {
             <Footer/>
           </Route>
 
-          <Route path= {"/"+selectedVendor}>
+          <Route path= {"/"+selectedVendor} >
             <Vendor selectedVendor={selectedVendor}/>
           </Route>
        </Switch>

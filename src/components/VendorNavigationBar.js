@@ -10,9 +10,9 @@ const Styles = styled.div`
     position: relative;
     background-image: none;
     transition: all 300ms linear;
-    padding: 1% 0% 1% 0%;
+    padding: 2% 0% 2% 0%;
     backdrop-filter: blur(25px);
-
+    
 
   }
   .navbar-brand{
@@ -98,7 +98,7 @@ const Wrapper = styled.div`
   }
 `
 
-export const NavigationBar = ({setSelectedCategory}) => {
+export const VendorNavigationBar = ({setSelectedCategory}) => {
   const onCategoryClicked = (i) => {
     setSelectedCategory(i);
     //clickToScroll();
@@ -110,25 +110,8 @@ export const NavigationBar = ({setSelectedCategory}) => {
     <Navbar expand="lg">
       <Navbar.Brand href="/" >St.John's Local Guide</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-
-        <Nav className="ml-auto">
-
-          {categoryData.map(
-            (item, index) =>(
-                <Nav.Item key={index}>
-                  <Nav.Link><Link to='vendorList' smooth={true} onClick={()=>{onCategoryClicked(item.title)} }>{item.title} </Link></Nav.Link>
-                </Nav.Item>
-            )
-          )}
-
-          <Nav.Item>
-            <Nav.Link><Link to='contact'  smooth={true}>Contact Us</Link></Nav.Link> 
-          </Nav.Item>
-
-        </Nav>
-      </Navbar.Collapse>
     </Navbar>
+    
     </Wrapper>  
   </Styles >
   )
