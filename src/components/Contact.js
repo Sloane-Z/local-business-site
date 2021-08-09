@@ -100,25 +100,37 @@ const ContactInfo = styled.div`
     text-align: left;
     
   }
+  width: 35%;
   @media screen and (max-width: 768px){
     display: none;
   }
+  word-break: break-word; 
+
 
 `
 
 const IconText = styled.div`
-  display: flex;
+
   align-items: center;
   justify-content: flex-start;
+  display: inline-block;
   .fa{
     flex: 0 1 20px;
     font-size: 1.8rem;
-    margin-right: 2rem;
+    margin-right: 2%;
   }
   span{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 300;
+    text-align: left;
+
   }
+  .div{
+    font-size: 1.2rem;
+    font-weight: 300;
+
+  }
+
   margin-bottom: 1rem;
 `
 
@@ -331,8 +343,8 @@ export class Contact extends React.Component {
             <h4>Contact Information</h4>
             <p>Fill up the form and our Team will get back to you within 24 hours.</p>
   
-            <IconText> <PhoneIcon size='25'aria-hidden ='true'/><span>709-765-6486</span></IconText>
-            <IconText> <EmailIcon size='25' aria-hidden ='true'/><span>stjohnslocalguide@gmail.com</span></IconText>
+            <IconText> <PhoneIcon size='25' aria-hidden ='true'/><div>709-765-6486</div></IconText>
+            <IconText> <EmailIcon size='25' aria-hidden ='true'/><div>stjohnslocalguide@gmail.com</div></IconText>
   
             <SocialMedia>
               <IconCircle href='#' > <FacebookIcon size = '25' aria-hidden ='true'/> </IconCircle>
