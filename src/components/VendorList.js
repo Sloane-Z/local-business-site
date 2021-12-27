@@ -117,7 +117,7 @@ export class VendorList extends React.Component{
     componentDidMount() {
         //fetch('https://backend.stjohnslocalguide.com/vendors')  
         //fetch('http://localhost:5000/vendors') 
-        fetch('https://backend.stjohnslocalguide.com/vendors')            
+        fetch('https://express-backend-lbs.herokuapp.com/vendors')            
         .then(res => res.json()).then((data) => {         
           
           this.setState({ vendors: data});
