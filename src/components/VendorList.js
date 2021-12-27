@@ -124,6 +124,13 @@ export class VendorList extends React.Component{
           //this.setState({ selectedCategory: this.props.selectedCategory});
           this.setState({ processing: false});
         })
+        .catch(
+            fetch('https://backend.stjohnslocalguide.com/vendors')
+            .then(res => res.json()).then((data) => {
+                this.setState({ vendors: data});
+                this.setState({ processing: false});
+            })
+        )
         
     }
 
